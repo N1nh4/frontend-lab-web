@@ -6,6 +6,11 @@
 }
 
 @theme inline {
+  /* Paleta de cores do sistema */
+
+  --cor-gradiente: linear-gradient(90deg, #004E4C, #00995D);
+  --cor-verde-escuro: #04412B;
+  --cor-verde-claro: #00995D;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
