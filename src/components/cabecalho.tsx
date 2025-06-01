@@ -17,7 +17,7 @@ export default function Cabecalho({ navLinks }: CabecalhoProps) {
 
   return (
     <header
-      className="w-full h-24 bg-gradient-to-r from-[#004E4C] to-verdeClaro relative z-10" 
+      className="fixed top-0 left-0 w-full h-24 bg-gradient-to-r from-[#004E4C] to-verdeClaro z-10" 
       style={shadowStyle}
     >
       <div className="h-full flex items-center px-14 justify-between">
