@@ -6,6 +6,13 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Search } from "lucide-react";
@@ -19,6 +26,93 @@ export default function Inicial() {
     { id: 5, label: 'Sobre nos', href: '/sobre-nos' },
     { id: 6, label: 'Criar conta', href: '/criar-conta' },
   ];
+
+  const StatusEnum = {
+    CHEIO: "CHEIO",
+    VAZIO: "VAZIO",
+    MODERADO: "MODERADO",
+  }
+
+  const cards = [
+    {
+      id: 1,
+      titulo: "UPA 24h",
+      avaliacaoEstrela: 4.0,
+      localizacao: "Rua das Flores, 123",
+      telefone: "(71) 1234-5678",
+      status: StatusEnum.CHEIO,
+      capacidade: 3.0,
+      ultimaAtualizacao: "2023-10-01",
+      imagem: "/images/upa.png",
+    },
+    {
+      id: 2,
+      titulo: "Hospital Municipal",
+      avaliacaoEstrela: 3.5,
+      localizacao: "Avenida Central, 456",
+      telefone: "(71) 9876-5432",
+      status: StatusEnum.VAZIO,
+      capacidade: 1.0,
+      ultimaAtualizacao: "2023-10-02",
+      imagem: "/images/hospital.png",
+    },
+    {
+      id: 3,
+      titulo: "Clínica da Família",
+      avaliacaoEstrela: 4.5,
+      localizacao: "Travessa da Saúde, 789",
+      telefone: "(71) 5555-5555",
+      status: StatusEnum.MODERADO,
+      capacidade: 2.0,
+      ultimaAtualizacao: "2023-10-03",
+      imagem: "/images/clinica.png",
+    },
+    {
+      id: 1,
+      titulo: "UPA 24h",
+      avaliacaoEstrela: 4.0,
+      localizacao: "Rua das Flores, 123",
+      telefone: "(71) 1234-5678",
+      status: StatusEnum.CHEIO,
+      capacidade: 3.0,
+      ultimaAtualizacao: "2023-10-01",
+      imagem: "/images/upa.png",
+    },
+    {
+      id: 2,
+      titulo: "Hospital Municipal",
+      avaliacaoEstrela: 3.5,
+      localizacao: "Avenida Central, 456",
+      telefone: "(71) 9876-5432",
+      status: StatusEnum.VAZIO,
+      capacidade: 1.0,
+      ultimaAtualizacao: "2023-10-02",
+      imagem: "/images/hospital.png",
+    },
+    {
+      id: 3,
+      titulo: "Clínica da Família",
+      avaliacaoEstrela: 4.5,
+      localizacao: "Travessa da Saúde, 789",
+      telefone: "(71) 5555-5555",
+      status: StatusEnum.MODERADO,
+      capacidade: 2.0,
+      ultimaAtualizacao: "2023-10-03",
+      imagem: "/images/clinica.png",
+    },
+    {
+      id: 3,
+      titulo: "Clínica da Família",
+      avaliacaoEstrela: 4.5,
+      localizacao: "Travessa da Saúde, 789",
+      telefone: "(71) 5555-5555",
+      status: StatusEnum.MODERADO,
+      capacidade: 2.0,
+      ultimaAtualizacao: "2023-10-03",
+      imagem: "/images/clinica.png",
+    },
+   
+  ]
 
   const shadowStyle = {
     boxShadow: "5px 5px 4px rgba(0, 0, 0, 0.25)",
@@ -147,6 +241,27 @@ export default function Inicial() {
             <option value="mais-antigos"> Localização </option>
             <option value="mais-votados"> Status</option>
           </select>
+      </div>
+
+      {/* Cards de unidades de saúde */}
+      <div className="grid grid-cols-3 place-items-center justify-center pl-10 pr-10 mt-8">
+        {cards.map((card, id) => (
+          <Card
+            key={card.id}
+            className= "flex bg-verdePastel w-11/12 h-80 m-4 p-4 rounded-lg "
+          >
+            <CardHeader>
+              <CardTitle>{card.titulo}</CardTitle>
+              
+            </CardHeader>
+            <CardContent>
+              <p></p>
+            </CardContent>
+            <CardFooter>
+              <p></p>
+            </CardFooter>
+          </Card>
+        ))}
       </div>
 
       
