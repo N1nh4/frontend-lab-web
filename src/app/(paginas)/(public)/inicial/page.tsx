@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { Search } from "lucide-react";
 
 export default function Inicial() {
   const navLinks = [
@@ -24,9 +25,9 @@ export default function Inicial() {
   const cardHeight = "h-[300px]"; 
 
   return (
-    <div className="w-full min-h-screen">
+    <main className="w-full min-h-screen">
       <Cabecalho navLinks={navLinks} />
-      <main className="w-full py-20 bg-gradient-to-r from-[#004E4C] to-verdeClaro">
+      <div className="w-full py-20 bg-gradient-to-r from-[#004E4C] to-verdeClaro">
         <Carousel
           opts={{
             align: "center", 
@@ -104,7 +105,25 @@ export default function Inicial() {
           <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2" />
           <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2" />
         </Carousel>
-      </main>
-    </div>
+      </div>
+
+      {/* Barra de pesquisa */} 
+      <div className="flex w-full items-center h-36 bg-verdeEscuro ">
+          <div className="flex items-center justify-start pl-40 h-full text-white text-4xl font-semibold">
+            <h1>EMERGÊNCIAS E UPAS</h1>
+          </div>
+          <div className="flex items-center w-6/12 justify-end h-full">
+            <input
+              type="text"
+              placeholder="Pesquisar por nome da unidade de saúde..."
+              className=" w-3/4 h-15 px-4 bg-white text-lg rounded-l-lg focus:outline-none focus:ring-2 focus:ring-verdeClaro"
+            />
+            <button className="flex items-center justify-center h-15 w-15 bg-verdeClaro  text-white rounded-r-lg">
+              <Search />
+            </button>
+          </div>
+        </div>
+      
+    </main>
   );
 }
