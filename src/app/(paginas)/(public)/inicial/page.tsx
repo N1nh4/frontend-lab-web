@@ -20,6 +20,10 @@ export default function Inicial() {
     { id: 6, label: 'Criar conta', href: '/criar-conta' },
   ];
 
+  const shadowStyle = {
+    boxShadow: "5px 5px 4px rgba(0, 0, 0, 0.25)",
+  };
+
 
   const cardWidth = "w-[1040px]";
   const cardHeight = "h-[300px]"; 
@@ -27,7 +31,7 @@ export default function Inicial() {
   return (
     <main className="w-full min-h-screen">
       <Cabecalho navLinks={navLinks} />
-      <div className="w-full py-20 bg-gradient-to-r from-[#004E4C] to-verdeClaro">
+      <div className="w-full py-20 bg-gradient-to-r from-[#004E4C] to-verdeClaro" style={shadowStyle}>
         <Carousel
           opts={{
             align: "center", 
@@ -36,8 +40,8 @@ export default function Inicial() {
           className="w-full mx-auto" 
         >
           <CarouselContent className={`-ml-20`}>
-            <CarouselItem className={`pl-20 basis-auto`}>
-              <div className={`p-10 bg-white rounded-2xl shadow-sm ${cardWidth} ${cardHeight} flex flex-col justify-between relative`}>
+            <CarouselItem className={`pl-20 basis-auto`} >
+              <div className={`p-10 bg-white rounded-2xl shadow-sm ${cardWidth} ${cardHeight} flex flex-col justify-between relative`} style={shadowStyle}>
                 <div className="flex flex-row items-center justify-between">
                   <div className="flex flex-col w-4/6">
                     <h1 className="text-5xl font-semibold text-gray-800 mb-10">
@@ -58,7 +62,7 @@ export default function Inicial() {
 
 
             <CarouselItem className={`pl-20 basis-auto`}>
-              <div className={`p-6 bg-white rounded-2xl shadow-sm ${cardWidth} ${cardHeight} flex flex-col justify-between`}>
+              <div className={`p-6 bg-white rounded-2xl shadow-sm ${cardWidth} ${cardHeight} flex flex-col justify-between`} style={shadowStyle}>
                 <div>
                   <h1 className="text-2xl font-semibold text-gray-800 mb-2">Seu impacto conta</h1>
                   <p className="text-base text-gray-600 mb-4">Veja como suas contribuições ajudam a comunidade a se manter informada.</p>
@@ -69,9 +73,10 @@ export default function Inicial() {
               </div>
             </CarouselItem>
 
-            <CarouselItem className={`pl-20 basis-auto`}>
+            <CarouselItem className={` pl-20 basis-auto overflow-visible`}>
               <div
-                className={`p-10 bg-[#106A43] rounded-2xl shadow-sm text-white ${cardWidth} ${cardHeight} flex flex-row justify-between items-center`}
+                className={`p-10 bg-[#106A43] rounded-2xl shadow-sm text-white ${cardWidth} ${cardHeight} flex flex-row justify-between items-center overflow-visible`}
+                style={shadowStyle}
               >
                 <div className="flex flex-col w-1/2 ">
                   <h1 className="text-5xl font-semibold mb-6">Objetivo 3: Saúde e Bem-Estar</h1>
@@ -91,7 +96,7 @@ export default function Inicial() {
 
 
             <CarouselItem className={`pl-20 basis-auto`}>
-              <div className={`p-6 bg-white rounded-2xl shadow-sm ${cardWidth} ${cardHeight} flex flex-col justify-between`}>
+              <div className={`p-6 bg-white rounded-2xl shadow-sm ${cardWidth} ${cardHeight} flex flex-col justify-between`} style={shadowStyle}>
                 <div>
                   <h1 className="text-2xl font-semibold text-gray-800 mb-2">Descubra unidades próximas</h1>
                   <p className="text-base text-gray-600 mb-4">Utilize o mapa para encontrar os hospitais e clínicas mais próximos de você.</p>
