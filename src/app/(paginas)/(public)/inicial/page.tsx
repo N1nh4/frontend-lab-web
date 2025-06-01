@@ -24,13 +24,21 @@ export default function Inicial() {
     boxShadow: "5px 5px 4px rgba(0, 0, 0, 0.25)",
   };
 
+  const shadowSearch = {
+    boxShadow: "4px 8px 15px rgba(0, 0, 0, 0.25)"
+  }
+
 
   const cardWidth = "w-[1040px]";
   const cardHeight = "h-[300px]"; 
 
   return (
     <main className="w-full min-h-screen">
+      
+      {/* Cabeçalho */}
       <Cabecalho navLinks={navLinks} />
+
+      {/* Carrossel de Destaques */}
       <div className="w-full py-20 bg-gradient-to-r from-[#004E4C] to-verdeClaro" style={shadowStyle}>
         <Carousel
           opts={{
@@ -94,7 +102,6 @@ export default function Inicial() {
               </div>
             </CarouselItem>
 
-
             <CarouselItem className={`pl-20 basis-auto`}>
               <div className={`p-6 bg-white rounded-2xl shadow-sm ${cardWidth} ${cardHeight} flex flex-col justify-between`} style={shadowStyle}>
                 <div>
@@ -113,7 +120,10 @@ export default function Inicial() {
       </div>
 
       {/* Barra de pesquisa */} 
-      <div className="flex w-full items-center h-36 bg-verdeEscuro ">
+      <div 
+        className="flex w-full items-center h-36 bg-verdeEscuro"
+        style={shadowSearch}
+      >
           <div className="flex items-center justify-start pl-40 h-full text-white text-4xl font-semibold">
             <h1>EMERGÊNCIAS E UPAS</h1>
           </div>
@@ -127,7 +137,19 @@ export default function Inicial() {
               <Search />
             </button>
           </div>
-        </div>
+      </div>
+
+      {/* Filtro das unidades de saúde */} 
+      <div className="flex items-center ml-20 mt-10 gap-x-2">
+          <span className="text-verdeEscuro text-2xl font-bold">Ordenar por</span>
+          <select className="ml-2 bg-white text-verdeEscuro border border-verdeClaro rounded-lg p-2">
+            <option value="mais-recentes"> Lotação </option>
+            <option value="mais-antigos"> Localização </option>
+            <option value="mais-votados"> Status</option>
+          </select>
+      </div>
+
+      
       
     </main>
   );
