@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { Search } from "lucide-react";
+import { Search, Star, User, Maximize2 } from "lucide-react";
 
 export default function Inicial() {
   const navLinks = [
@@ -38,78 +38,78 @@ export default function Inicial() {
       id: 1,
       titulo: "UPA 24h",
       avaliacaoEstrela: 4.0,
-      localizacao: "Rua das Flores, 123",
+      endereco: "Rua das Flores, 123",
       telefone: "(71) 1234-5678",
       status: StatusEnum.CHEIO,
       capacidade: 3.0,
-      ultimaAtualizacao: "2023-10-01",
-      imagem: "/images/upa.png",
+      ultimaAtualizacao: "ultima atualização há 2 horas",
+      imagem: "/images/upa.jpeg",
     },
     {
       id: 2,
       titulo: "Hospital Municipal",
       avaliacaoEstrela: 3.5,
-      localizacao: "Avenida Central, 456",
+      endereco: "Avenida Central, 456",
       telefone: "(71) 9876-5432",
       status: StatusEnum.VAZIO,
       capacidade: 1.0,
       ultimaAtualizacao: "2023-10-02",
-      imagem: "/images/hospital.png",
+      imagem: "/images/upa.jpeg",
     },
     {
       id: 3,
       titulo: "Clínica da Família",
       avaliacaoEstrela: 4.5,
-      localizacao: "Travessa da Saúde, 789",
+      endereco: "Travessa da Saúde, 789",
       telefone: "(71) 5555-5555",
       status: StatusEnum.MODERADO,
       capacidade: 2.0,
       ultimaAtualizacao: "2023-10-03",
-      imagem: "/images/clinica.png",
+      imagem: "/images/upa.jpeg",
     },
     {
       id: 1,
       titulo: "UPA 24h",
       avaliacaoEstrela: 4.0,
-      localizacao: "Rua das Flores, 123",
+      endereco: "Rua das Flores, 123",
       telefone: "(71) 1234-5678",
       status: StatusEnum.CHEIO,
       capacidade: 3.0,
       ultimaAtualizacao: "2023-10-01",
-      imagem: "/images/upa.png",
+      imagem: "/images/upa.jpeg",
     },
     {
       id: 2,
       titulo: "Hospital Municipal",
       avaliacaoEstrela: 3.5,
-      localizacao: "Avenida Central, 456",
+      endereco: "Avenida Central, 456",
       telefone: "(71) 9876-5432",
       status: StatusEnum.VAZIO,
       capacidade: 1.0,
       ultimaAtualizacao: "2023-10-02",
-      imagem: "/images/hospital.png",
+      imagem: "/images/upa.jpeg",
     },
     {
       id: 3,
       titulo: "Clínica da Família",
       avaliacaoEstrela: 4.5,
-      localizacao: "Travessa da Saúde, 789",
+      endereco: "Travessa da Saúde, 789",
       telefone: "(71) 5555-5555",
       status: StatusEnum.MODERADO,
       capacidade: 2.0,
       ultimaAtualizacao: "2023-10-03",
-      imagem: "/images/clinica.png",
+      imagem: "/images/upa.jpeg",
     },
     {
       id: 3,
       titulo: "Clínica da Família",
       avaliacaoEstrela: 4.5,
-      localizacao: "Travessa da Saúde, 789",
+      endereco: "Travessa da Saúde, 789",
       telefone: "(71) 5555-5555",
       status: StatusEnum.MODERADO,
       capacidade: 2.0,
       ultimaAtualizacao: "2023-10-03",
-      imagem: "/images/clinica.png",
+      imagem: "/images/upa.jpeg",
     },
    
   ]
@@ -250,15 +250,36 @@ export default function Inicial() {
             key={card.id}
             className= "flex bg-verdePastel w-11/12 h-80 m-4 p-4 rounded-lg "
           >
-            <CardHeader>
-              <CardTitle>{card.titulo}</CardTitle>
-              
-            </CardHeader>
-            <CardContent>
-              <p></p>
+            <CardContent className="flex">
+              <div className="flex flex-row items-center w-2/3 justify-center mb-4">
+                <Image
+                  src={card.imagem}
+                  alt={card.titulo}
+                  width={300}
+                  height={300}
+                  />
+              </div>
+              <div className="flex flex-col w-full justify-center text-justify pl-8">
+                <div className="flex items-end justify-between w-full mb-2">
+                  <h1>{card.titulo}</h1>
+                  <Maximize2/>
+                </div>
+                <p>Endereço: {card.endereco}</p>
+                <div className="flex items-center mb-2">
+                  {Array.from({ length: Math.floor(card.avaliacaoEstrela) }).map((_, i) => (
+                    <Star stroke="0.5" fill="black" key={i} className="" />
+                  ))}
+                </div>
+                <p>Telefone: {card.telefone}</p>
+                <p className="font-bold">Status: {card.status}</p>
+                <div className="flex items-center mb-2">
+                  <User className="text-red-600"/><User /><User /><User /><User />
+                </div>
+                <span className="text-">{card.ultimaAtualizacao}</span>
+              </div>
             </CardContent>
             <CardFooter>
-              <p></p>
+            <button className="bg-verdeEscuro w-full text-white py-2 px-4 rounded ">REGISTRAR LOTAÇÃO</button>
             </CardFooter>
           </Card>
         ))}
