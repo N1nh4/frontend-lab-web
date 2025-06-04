@@ -244,13 +244,13 @@ export default function Inicial() {
       </div>
 
       {/* Cards de unidades de saúde */}
-      <div className="grid grid-cols-3 place-items-center justify-center pl-10 pr-10 mt-8">
+      <div className="grid grid-cols-3 pl-10 pr-10 place-items-center justify-center  mt-8">
         {cards.map((card, id) => (
           <Card
             key={card.id}
-            className= "flex bg-verdePastel w-11/12 h-80 m-4 p-4 rounded-lg "
+            className= "flex flex-col bg-verdePastel w-11/12 h-80 m-4  rounded-lg "
           >
-            <CardContent className="flex">
+            <CardContent className="flex flex-row flex-grow">
               <div className="flex flex-row items-center w-2/3 justify-center mb-4">
                 <Image
                   src={card.imagem}
@@ -278,8 +278,8 @@ export default function Inicial() {
                 <span className="text-">{card.ultimaAtualizacao}</span>
               </div>
             </CardContent>
-            <CardFooter>
-            <button className="bg-verdeEscuro w-full text-white py-2 px-4 rounded ">REGISTRAR LOTAÇÃO</button>
+            <CardFooter className="flex p-0">
+            <button className="bg-verdeEscuro  w-full text-white py-2 px-4 rounded-b-lg ">REGISTRAR LOTAÇÃO</button>
             </CardFooter>
           </Card>
         ))}
