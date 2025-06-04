@@ -215,19 +215,19 @@ export default function Inicial() {
 
       {/* Barra de pesquisa */} 
       <div 
-        className="flex w-full items-center h-36 bg-verdeEscuro"
+        className="flex w-full items-center h-24 bg-verdeEscuro"
         style={shadowSearch}
       >
-          <div className="flex items-center justify-start pl-40 h-full text-white text-4xl font-semibold">
+          <div className="flex items-center justify-start pl-40 h-full text-white text-2xl font-semibold">
             <h1>EMERGÊNCIAS E UPAS</h1>
           </div>
           <div className="flex items-center w-6/12 justify-end h-full">
             <input
               type="text"
               placeholder="Pesquisar por nome da unidade de saúde..."
-              className=" w-3/4 h-15 px-4 bg-white text-lg rounded-l-lg focus:outline-none focus:ring-2 focus:ring-verdeClaro"
+              className=" w-3/4 h-12 px-4 bg-white text-xs rounded-l-lg focus:outline-none focus:ring-2 focus:ring-verdeClaro"
             />
-            <button className="flex items-center justify-center h-15 w-15 bg-verdeClaro  text-white rounded-r-lg">
+            <button className="flex items-center justify-center h-12 w-15 bg-verdeClaro  text-white rounded-r-lg">
               <Search />
             </button>
           </div>
