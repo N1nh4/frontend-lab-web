@@ -17,21 +17,21 @@ export default function Cabecalho({ navLinks }: CabecalhoProps) {
 
   return (
     <header
-      className="fixed top-0 left-0 w-full h-24 bg-gradient-to-r from-[#004E4C] to-verdeClaro z-10" 
+      className="fixed top-0 left-0 w-full h-16 bg-gradient-to-r from-[#004E4C] to-verdeClaro z-10" 
       style={shadowStyle}
     >
-      <div className="h-full flex items-center px-14 justify-between">
+      <div className="h-full flex items-center px-10 justify-between">
         {/* Logo */}
         <div className="flex items-center">
           <Link
             href="/inicial"
           >
-            <span className="text-3xl font-bold text-white">UpaAgora</span>
+            <span className="text-2xl font-bold text-white">UpaAgora</span>
           </Link>
         </div>
 
         {/* Navegação */}
-        <nav className="flex items-center space-x-14 text-3xl">
+        <nav className="flex items-center space-x-8 text-xl">
           {navLinks.map((link, id) => (
             <Link
               href={link.href}

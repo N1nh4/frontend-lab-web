@@ -123,8 +123,8 @@ export default function Inicial() {
   }
 
 
-  const cardWidth = "w-[1040px]";
-  const cardHeight = "h-[300px]"; 
+  const cardWidth = "w-[775px]";
+  const cardHeight = "h-[190px]"; 
 
   return (
     <main className="w-full min-h-screen">
@@ -133,7 +133,7 @@ export default function Inicial() {
       <Cabecalho navLinks={navLinks} />
 
       {/* Carrossel de Destaques */}
-      <div className="w-full py-20 bg-gradient-to-r from-[#004E4C] to-verdeClaro" style={shadowStyle}>
+      <div className="w-full py-14 bg-gradient-to-r from-[#004E4C] to-verdeClaro" style={shadowStyle}>
         <Carousel
           opts={{
             align: "center", 
@@ -143,13 +143,13 @@ export default function Inicial() {
         >
           <CarouselContent className={`-ml-20`}>
             <CarouselItem className={`pl-20 basis-auto`} >
-              <div className={`p-10 bg-white rounded-2xl shadow-sm ${cardWidth} ${cardHeight} flex flex-col justify-between relative`} style={shadowStyle}>
+              <div className={`p-6 bg-white rounded-2xl shadow-sm ${cardWidth} ${cardHeight} flex flex-col justify-between relative`} style={shadowStyle}>
                 <div className="flex flex-row items-center justify-between">
-                  <div className="flex flex-col w-4/6">
-                    <h1 className="text-5xl font-semibold text-gray-800 mb-10">
+                  <div className="flex flex-col w-3/5">
+                    <h1 className="text-3xl font-semibold text-gray-800 mb-2">
                       Atualize o status da sua unidade de saúde
                     </h1>
-                    <p className="text-3xl text-gray-600 mb-4">
+                    <p className="text-xl text-gray-600 mb-4">
                       Ajude outros usuários informando a situação atual das emergências.
                     </p>
                   </div>
@@ -215,19 +215,19 @@ export default function Inicial() {
 
       {/* Barra de pesquisa */} 
       <div 
-        className="flex w-full items-center h-36 bg-verdeEscuro"
+        className="flex w-full items-center h-24 bg-verdeEscuro"
         style={shadowSearch}
       >
-          <div className="flex items-center justify-start pl-40 h-full text-white text-4xl font-semibold">
+          <div className="flex items-center justify-start pl-40 h-full text-white text-2xl font-semibold">
             <h1>EMERGÊNCIAS E UPAS</h1>
           </div>
           <div className="flex items-center w-6/12 justify-end h-full">
             <input
               type="text"
               placeholder="Pesquisar por nome da unidade de saúde..."
-              className=" w-3/4 h-15 px-4 bg-white text-lg rounded-l-lg focus:outline-none focus:ring-2 focus:ring-verdeClaro"
+              className=" w-3/4 h-12 px-4 bg-white text-xs rounded-l-lg focus:outline-none focus:ring-2 focus:ring-verdeClaro"
             />
-            <button className="flex items-center justify-center h-15 w-15 bg-verdeClaro  text-white rounded-r-lg">
+            <button className="flex items-center justify-center h-12 w-15 bg-verdeClaro  text-white rounded-r-lg">
               <Search />
             </button>
           </div>
@@ -244,13 +244,13 @@ export default function Inicial() {
       </div>
 
       {/* Cards de unidades de saúde */}
-      <div className="grid grid-cols-3 place-items-center justify-center pl-10 pr-10 mt-8">
+      <div className="grid grid-cols-3 pl-10 pr-10 place-items-center justify-center  mt-8">
         {cards.map((card, id) => (
           <Card
             key={card.id}
-            className= "flex bg-verdePastel w-11/12 h-80 m-4 p-4 rounded-lg "
+            className= "flex flex-col bg-verdePastel w-11/12 h-80 m-4  rounded-lg "
           >
-            <CardContent className="flex">
+            <CardContent className="flex flex-row flex-grow">
               <div className="flex flex-row items-center w-2/3 justify-center mb-4">
                 <Image
                   src={card.imagem}
@@ -278,8 +278,8 @@ export default function Inicial() {
                 <span className="text-">{card.ultimaAtualizacao}</span>
               </div>
             </CardContent>
-            <CardFooter>
-            <button className="bg-verdeEscuro w-full text-white py-2 px-4 rounded ">REGISTRAR LOTAÇÃO</button>
+            <CardFooter className="flex p-0">
+            <button className="bg-verdeEscuro  w-full text-white py-2 px-4 rounded-b-lg ">REGISTRAR LOTAÇÃO</button>
             </CardFooter>
           </Card>
         ))}
