@@ -123,8 +123,8 @@ export default function Inicial() {
   }
 
 
-  const cardWidth = "w-[1040px]";
-  const cardHeight = "h-[300px]"; 
+  const cardWidth = "w-[775px]";
+  const cardHeight = "h-[190px]"; 
 
   return (
     <main className="w-full min-h-screen">
@@ -133,7 +133,7 @@ export default function Inicial() {
       <Cabecalho navLinks={navLinks} />
 
       {/* Carrossel de Destaques */}
-      <div className="w-full py-20 bg-gradient-to-r from-[#004E4C] to-verdeClaro" style={shadowStyle}>
+      <div className="w-full py-14 bg-gradient-to-r from-[#004E4C] to-verdeClaro" style={shadowStyle}>
         <Carousel
           opts={{
             align: "center", 
@@ -143,13 +143,13 @@ export default function Inicial() {
         >
           <CarouselContent className={`-ml-20`}>
             <CarouselItem className={`pl-20 basis-auto`} >
-              <div className={`p-10 bg-white rounded-2xl shadow-sm ${cardWidth} ${cardHeight} flex flex-col justify-between relative`} style={shadowStyle}>
+              <div className={`p-6 bg-white rounded-2xl shadow-sm ${cardWidth} ${cardHeight} flex flex-col justify-between relative`} style={shadowStyle}>
                 <div className="flex flex-row items-center justify-between">
-                  <div className="flex flex-col w-4/6">
-                    <h1 className="text-5xl font-semibold text-gray-800 mb-10">
+                  <div className="flex flex-col w-3/5">
+                    <h1 className="text-3xl font-semibold text-gray-800 mb-2">
                       Atualize o status da sua unidade de saúde
                     </h1>
-                    <p className="text-3xl text-gray-600 mb-4">
+                    <p className="text-xl text-gray-600 mb-4">
                       Ajude outros usuários informando a situação atual das emergências.
                     </p>
                   </div>
