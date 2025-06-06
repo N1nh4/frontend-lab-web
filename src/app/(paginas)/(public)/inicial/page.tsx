@@ -43,18 +43,18 @@ export default function Inicial() {
       status: StatusEnum.CHEIO,
       capacidade: 3.0,
       ultimaAtualizacao: "ultima atualização há 2 horas",
-      imagem: "/images/upa.jpeg",
+      imagem: "/images/upa.png",
     },
     {
       id: 2,
-      titulo: "Hospital Municipal",
+      titulo: "Unidade de Pronto Atendimento (UPA)",
       avaliacaoEstrela: 3.5,
       endereco: "Avenida Central, 456",
       telefone: "(71) 9876-5432",
       status: StatusEnum.VAZIO,
       capacidade: 1.0,
       ultimaAtualizacao: "2023-10-02",
-      imagem: "/images/upa.jpeg",
+      imagem: "/images/upa.png",
     },
     {
       id: 3,
@@ -65,7 +65,7 @@ export default function Inicial() {
       status: StatusEnum.MODERADO,
       capacidade: 2.0,
       ultimaAtualizacao: "2023-10-03",
-      imagem: "/images/upa.jpeg",
+      imagem: "/images/upa.png",
     },
     {
       id: 1,
@@ -76,7 +76,7 @@ export default function Inicial() {
       status: StatusEnum.CHEIO,
       capacidade: 3.0,
       ultimaAtualizacao: "2023-10-01",
-      imagem: "/images/upa.jpeg",
+      imagem: "/images/upa.png",
     },
     {
       id: 2,
@@ -87,7 +87,7 @@ export default function Inicial() {
       status: StatusEnum.VAZIO,
       capacidade: 1.0,
       ultimaAtualizacao: "2023-10-02",
-      imagem: "/images/upa.jpeg",
+      imagem: "/images/upa.png",
     },
     {
       id: 3,
@@ -98,7 +98,7 @@ export default function Inicial() {
       status: StatusEnum.MODERADO,
       capacidade: 2.0,
       ultimaAtualizacao: "2023-10-03",
-      imagem: "/images/upa.jpeg",
+      imagem: "/images/upa.png",
     },
     {
       id: 3,
@@ -109,7 +109,7 @@ export default function Inicial() {
       status: StatusEnum.MODERADO,
       capacidade: 2.0,
       ultimaAtualizacao: "2023-10-03",
-      imagem: "/images/upa.jpeg",
+      imagem: "/images/upa.png",
     },
    
   ]
@@ -123,8 +123,8 @@ export default function Inicial() {
   }
 
 
-  const cardWidth = "w-[775px]";
-  const cardHeight = "h-[190px]"; 
+  const cardWidth = "w-[700px]";
+  const cardHeight = "h-[200px]"; 
 
   return (
     <main className="w-full min-h-screen">
@@ -218,7 +218,7 @@ export default function Inicial() {
         className="flex w-full items-center h-24 bg-verdeEscuro"
         style={shadowSearch}
       >
-          <div className="flex items-center justify-start pl-40 h-full text-white text-2xl font-semibold">
+          <div className="flex items-center justify-start pl-32 h-full text-white text-2xl font-semibold">
             <h1>EMERGÊNCIAS E UPAS</h1>
           </div>
           <div className="flex items-center w-6/12 justify-end h-full">
@@ -244,42 +244,46 @@ export default function Inicial() {
       </div>
 
       {/* Cards de unidades de saúde */}
-      <div className="grid grid-cols-3 pl-10 pr-10 place-items-center justify-center  mt-8">
+      <div className="grid grid-cols-3 pl-10 pr-10 place-items-center justify-center mt-8">
         {cards.map((card, id) => (
           <Card
             key={card.id}
-            className= "flex flex-col bg-verdePastel w-11/12 h-80 m-4  rounded-lg "
+            className= "flex flex-col relative bg-verdePastel w-11/12  mx-4 rounded-lg mb-6 "
           >
+            <Maximize2 
+              className="absolute top-2 right-2 cursor-pointer" 
+              size={18} />
             <CardContent className="flex flex-row flex-grow">
-              <div className="flex flex-row items-center w-2/3 justify-center mb-4">
+              <div className="flex flex-row items-center w-full justify-center ">
                 <Image
                   src={card.imagem}
                   alt={card.titulo}
                   width={300}
                   height={300}
+                  
                   />
               </div>
-              <div className="flex flex-col w-full justify-center text-justify pl-8">
-                <div className="flex items-end justify-between w-full mb-2">
-                  <h1>{card.titulo}</h1>
-                  <Maximize2/>
+              <div className="flex flex-col text-verdeEscuro w-11/12 justify-center text-justify pl-4 gap-y-1">
+                <div className="flex items-end justify-between w-full">
+                  <h1 className="text-base text-left font-bold gap-y-0 leading-none">{card.titulo}</h1>
+                  
                 </div>
-                <p>Endereço: {card.endereco}</p>
-                <div className="flex items-center mb-2">
+                <div className="flex items-center ">
                   {Array.from({ length: Math.floor(card.avaliacaoEstrela) }).map((_, i) => (
-                    <Star stroke="0.5" fill="black" key={i} className="" />
+                    <Star stroke="0.5" fill="black" key={i} size={18}  />
                   ))}
                 </div>
-                <p>Telefone: {card.telefone}</p>
-                <p className="font-bold">Status: {card.status}</p>
-                <div className="flex items-center mb-2">
-                  <User className="text-red-600"/><User /><User /><User /><User />
+                <p className="text-xs "><span className="font-bold">Endereço:</span> {card.endereco}</p>
+                <p className="text-xs  "><span className="font-bold">Telefone:</span> {card.telefone}</p>
+                <p className="font-bold text-sm ">Status: {card.status}</p>
+                <div className="flex items-center " >
+                  <User className="text-red-600" size={22}/><User size={22}/><User size={22}/><User size={22}/><User size={22}/>
                 </div>
-                <span className="text-">{card.ultimaAtualizacao}</span>
+                <span className="text-xs italic">{card.ultimaAtualizacao}</span>
               </div>
             </CardContent>
             <CardFooter className="flex p-0">
-            <button className="bg-verdeEscuro  w-full text-white py-2 px-4 rounded-b-lg ">REGISTRAR LOTAÇÃO</button>
+            <button className="bg-verdeEscuro w-full text-white py-2 px-4 rounded-b-lg ">REGISTRAR LOTAÇÃO</button>
             </CardFooter>
           </Card>
         ))}

@@ -28,8 +28,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        
-        <main className="flex-1 overflow-y-auto pt-16">{children}</main>
+        {/* Adicionar possivel overflow-y-auto no futuro */}
+        <main className="flex-1  pt-16">{children}</main>
       </body>
     </html>
   );
