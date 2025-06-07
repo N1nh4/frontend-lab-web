@@ -1,3 +1,4 @@
+'use client';
 import Cabecalho from "@/components/cabecalho";
 import {
   Carousel,
@@ -17,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Search, User, Maximize2 } from "lucide-react";
 import { TbStar, TbStarFilled, TbStarHalfFilled } from "react-icons/tb";
+import { useEffect, useRef, useState } from "react";
 
 export default function Inicial() {
   const navLinks = [
@@ -27,6 +29,32 @@ export default function Inicial() {
     { id: 5, label: 'Sobre nos', href: '/sobre-nos' },
     { id: 6, label: 'Criar conta', href: '/criar-conta' },
   ];
+
+  // Lógica para a barra de pesquisa mudar de tamanho quando se torna sticky
+  const searchBarRef = useRef<HTMLDivElement>(null);
+  const [isSearchBarSticky, setIsSearchBarSticky] = useState(false);
+
+  useEffect(() => {
+    console.log('searchBarRef.current na montagem do useEffect:', searchBarRef.current);
+    const handleScroll = () => {
+      if (searchBarRef.current) {
+        const rect = searchBarRef.current.getBoundingClientRect();
+        const stickyThreshold = 64;
+        const newIsSticky = rect.top <= stickyThreshold; 
+        
+        console.log(`handleScroll: rect.top = ${rect.top}, newIsSticky = ${newIsSticky}, currentIsSticky = ${isSearchBarSticky}`);
+        if (newIsSticky !== isSearchBarSticky) {
+          setIsSearchBarSticky(newIsSticky);
+          console.log("MUDANÇA DE ESTADO: Barra de pesquisa sticky para:", newIsSticky); // <-- Esta mensagem deve aparecer quando o estado muda
+        }
+      } else {
+         console.log("searchBarRef.current é NULO dentro do handleScroll. Elemento não encontrado.");
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isSearchBarSticky]);
 
   const StatusEnum = {
     VAZIO: "VAZIO",
@@ -55,6 +83,56 @@ export default function Inicial() {
       telefone: "(71) 9876-5432",
       status: StatusEnum.MUITO_CHEIO,
       ultimaAtualizacao: "2023-10-02",
+      imagem: "/images/upa.png",
+    },
+    {
+      id: 3,
+      titulo: "Clínica da Família",
+      avaliacaoEstrela: 4.5,
+      endereco: "Travessa da Saúde, 789",
+      telefone: "(71) 5555-5555",
+      status: StatusEnum.MODERADO,
+      ultimaAtualizacao: "2023-10-03",
+      imagem: "/images/upa.png",
+    },
+    {
+      id: 1,
+      titulo: "UPA 24h",
+      avaliacaoEstrela: 4.0,
+      endereco: "Rua das Flores, 123",
+      telefone: "(71) 1234-5678",
+      status: StatusEnum.CHEIO,
+      ultimaAtualizacao: "2023-10-01",
+      imagem: "/images/upa.png",
+    },
+    {
+      id: 2,
+      titulo: "Hospital Municipal",
+      avaliacaoEstrela: 3.5,
+      endereco: "Avenida Central, 456",
+      telefone: "(71) 9876-5432",
+      status: StatusEnum.POUCO_VAZIO,
+      ultimaAtualizacao: "2023-10-02",
+      imagem: "/images/upa.png",
+    },
+    {
+      id: 3,
+      titulo: "Clínica da Família",
+      avaliacaoEstrela: 4.5,
+      endereco: "Travessa da Saúde, 789",
+      telefone: "(71) 5555-5555",
+      status: StatusEnum.POUCO_VAZIO,
+      ultimaAtualizacao: "2023-10-03",
+      imagem: "/images/upa.png",
+    },
+    {
+      id: 3,
+      titulo: "Clínica da Família",
+      avaliacaoEstrela: 4.5,
+      endereco: "Travessa da Saúde, 789",
+      telefone: "(71) 5555-5555",
+      status: StatusEnum.MODERADO,
+      ultimaAtualizacao: "2023-10-03",
       imagem: "/images/upa.png",
     },
     {
@@ -184,6 +262,8 @@ const getCapacityFromStatus = (status: string) => {
   }
 };
 
+// Renderiza os ícones de usuário com base no status
+
 const renderUserIcons = (status: string) => {
   const totalIcons = 5;
   const userIcons = [];
@@ -297,24 +377,34 @@ const renderUserIcons = (status: string) => {
         </Carousel>
       </div>
 
-      {/* Barra de pesquisa */} 
+       {/* Barra de pesquisa */} 
+       
       <div 
-        className="sticky top-16 z-50 flex w-full items-center h-24 bg-verdeEscuro"
+        ref={searchBarRef} 
+        className={`sticky top-16 z-50 flex w-full items-center bg-verdeEscuro transition-all duration-300 ${
+          isSearchBarSticky ? 'h-16' : 'h-24' 
+        }`}
         style={shadowSearch}
       >
-          <div className="flex items-center justify-start pl-32 h-full text-white text-2xl font-semibold">
+        <div className={`flex items-center justify-start pl-32 text-white font-semibold transition-all duration-300 ${
+            isSearchBarSticky ? 'text-xl' : 'text-2xl h-full' 
+        }`}>
             <h1>EMERGÊNCIAS E UPAS</h1>
-          </div>
-          <div className="flex items-center w-6/12 justify-end h-full">
+        </div>
+        <div className="flex items-center w-6/12 justify-end h-full">
             <input
-              type="text"
-              placeholder="Pesquisar por nome da unidade de saúde..."
-              className=" w-3/4 h-12 px-4 bg-white text-xs rounded-l-lg focus:outline-none focus:ring-2 focus:ring-verdeClaro"
+                type="text"
+                placeholder="Pesquisar por nome da unidade de saúde..."
+                className={`w-3/4 px-4 bg-white text-xs rounded-l-lg focus:outline-none focus:ring-2 focus:ring-verdeClaro transition-all duration-300 ${
+                    isSearchBarSticky ? 'h-9' : 'h-12' 
+                }`}
             />
-            <button className="flex items-center justify-center h-12 w-15 bg-verdeClaro  text-white rounded-r-lg">
-              <Search />
+            <button className={`flex items-center justify-center w-15 bg-verdeClaro text-white rounded-r-lg transition-all duration-300 ${
+                isSearchBarSticky ? 'h-9' : 'h-12' // Altura do botão
+            }`}>
+                <Search />
             </button>
-          </div>
+        </div>
       </div>
 
       {/* Filtro das unidades de saúde */} 
