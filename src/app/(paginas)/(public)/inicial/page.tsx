@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { Search, Star, User, Maximize2 } from "lucide-react";
+import { Search, User, Maximize2 } from "lucide-react";
 import { TbStar, TbStarFilled, TbStarHalfFilled } from "react-icons/tb";
 
 export default function Inicial() {
@@ -44,7 +44,6 @@ export default function Inicial() {
       endereco: "Rua das Flores muito grande e loge de tudo, 123",
       telefone: "(71) 1234-5678",
       status: StatusEnum.VAZIO,
-      capacidade: 2.0,
       ultimaAtualizacao: "ultima atualização há 2 horas",
       imagem: "/images/upa.png",
     },
@@ -55,7 +54,6 @@ export default function Inicial() {
       endereco: "Avenida Central, 456",
       telefone: "(71) 9876-5432",
       status: StatusEnum.MUITO_CHEIO,
-      capacidade: 5.0,
       ultimaAtualizacao: "2023-10-02",
       imagem: "/images/upa.png",
     },
@@ -66,7 +64,6 @@ export default function Inicial() {
       endereco: "Travessa da Saúde, 789",
       telefone: "(71) 5555-5555",
       status: StatusEnum.MODERADO,
-      capacidade: 3.0,
       ultimaAtualizacao: "2023-10-03",
       imagem: "/images/upa.png",
     },
@@ -77,7 +74,6 @@ export default function Inicial() {
       endereco: "Rua das Flores, 123",
       telefone: "(71) 1234-5678",
       status: StatusEnum.CHEIO,
-      capacidade: 4.0,
       ultimaAtualizacao: "2023-10-01",
       imagem: "/images/upa.png",
     },
@@ -88,7 +84,6 @@ export default function Inicial() {
       endereco: "Avenida Central, 456",
       telefone: "(71) 9876-5432",
       status: StatusEnum.POUCO_VAZIO,
-      capacidade: 1.0,
       ultimaAtualizacao: "2023-10-02",
       imagem: "/images/upa.png",
     },
@@ -99,7 +94,6 @@ export default function Inicial() {
       endereco: "Travessa da Saúde, 789",
       telefone: "(71) 5555-5555",
       status: StatusEnum.POUCO_VAZIO,
-      capacidade: 1.0,
       ultimaAtualizacao: "2023-10-03",
       imagem: "/images/upa.png",
     },
@@ -110,7 +104,6 @@ export default function Inicial() {
       endereco: "Travessa da Saúde, 789",
       telefone: "(71) 5555-5555",
       status: StatusEnum.MODERADO,
-      capacidade: 3.0,
       ultimaAtualizacao: "2023-10-03",
       imagem: "/images/upa.png",
     },
@@ -306,7 +299,7 @@ const renderUserIcons = (status: string) => {
 
       {/* Barra de pesquisa */} 
       <div 
-        className="flex w-full items-center h-24 bg-verdeEscuro"
+        className="sticky top-16 z-50 flex w-full items-center h-24 bg-verdeEscuro"
         style={shadowSearch}
       >
           <div className="flex items-center justify-start pl-32 h-full text-white text-2xl font-semibold">
