@@ -1,64 +1,66 @@
-"use client";
+'use client'; // Mantemos 'use client' porque usamos useParams
+
+import BarraTitulo from "@/components/barraTitulo";
+import Cabecalho from "@/components/cabecalho";
 import { useParams } from "next/navigation";
-import React from "react";
+import React from "react"; // Não precisamos de useState/useEffect por enquanto
+import Image from "next/image";
 
-const StatusEnum = {
-    VAZIO: "VAZIO",
-    POUCO_VAZIO: "POUCO VAZIO",
-    MODERADO: "MODERADO",
-    CHEIO: "CHEIO",
-    MUITO_CHEIO: "MUITO CHEIO",
-  }
-
-const cards = [
-    {
-      id: 1,
-      titulo: "UPA 24h",
-      avaliacaoEstrela: 4.0,
-      endereco: "Rua das Flores muito grande e loge de tudo, 123",
-      telefone: "(71) 1234-5678",
-      status: StatusEnum.VAZIO,
-      ultimaAtualizacao: "ultima atualização há 2 horas",
-      imagem: "/images/upa.png",
-    },
-];
+// Importe suas interfaces e o StatusEnum do seu arquivo de dados mockados
+import { UnidadeSaude, allUnidadesData } from '@/data/unidades'; 
+// As funções renderStars, renderUserIcons, etc., não serão incluídas nesta versão básica
 
 export default function UnidadeDetalhesPage() {
+    const navLinks = [
+        { id: 1, label: 'Registrar lotação', href: '/registrar-lotacao' },
+        { id: 2, label: 'Ir para o mapa', href: '/mapa' },
+        { id: 3, label: 'Ranking', href: '/ranking' },
+        { id: 4, label: 'Entrar', href: '/entrar' },
+        { id: 5, label: 'Sobre nos', href: '/sobre-nos' },
+        { id: 6, label: 'Criar conta', href: '/criar-conta' },
+    ];
+
     const params = useParams();
-    const unidadeId = params.id; // Obter o ID da unidade a partir dos parâmetros da URL
+    const unidadeId = params.id; // Obter o ID da unidade a partir dos parâmetros da URL (vem como string)
 
-    const unidade = cards.find((card) => card.id.toString() === unidadeId);
+    // A busca da unidade é feita diretamente no array mockado
+    // Em um cenário real, você faria uma chamada de API AQUI.
+    const unidade: UnidadeSaude | undefined = allUnidadesData.find(u => u.id.toString() === unidadeId);
 
+    // Se a unidade não for encontrada
     if (!unidade) {
         return (
-            <div className="flex items-center justify-center h-screen">
-                <h1 className="text-2xl font-bold">Unidade não encontrada</h1>
-                <p className="text-gray-600">Verifique o ID da unidade</p>
-            </div>
+            <main className="w-full min-h-screen flex flex-col items-center justify-center p-8">
+                <h1 className="text-2xl font-bold text-red-600">Unidade não encontrada</h1>
+                <p className="text-gray-600 mt-2">Verifique o ID da unidade na URL.</p>
+            </main>
         );
     }
 
+    // Renderiza a unidade
     return (
-        <main className="w-full min-h-screen p-8">
-            <h1 className="text-4xl font-bold text-verdeEscuro mb-6">{unidade.titulo}</h1>
-            <p className="text-xl text-gray-700 mb-2">Endereço: {unidade.endereco}</p>
-            <p className="text-xl text-gray-700 mb-2">Telefone: {unidade.telefone}</p>
-            <p className="text-xl text-gray-700 mb-2">Status: {unidade.status}</p>
-            {/* ... Renderize a imagem, comentários, etc. conforme a segunda foto ... */}
-            <img src={unidade.imagem} alt={unidade.titulo} width={500} height={300} className="my-4" />
-
-            <div className="mt-8">
-                <h2 className="text-3xl font-semibold text-verdeEscuro mb-4">Comentários</h2>
-                {/* Aqui você adicionaria a UI para comentários */}
-                <p>Adicione um comentário...</p>
-                {/* Exemplo de comentário simulado */}
-                <div className="border p-4 mt-4 rounded-lg bg-gray-50">
-                    <p className="font-bold">Roberto Dias</p>
-                    <p className="text-gray-800">Lugar péssimo odiei, muito lotado atendimento péssimo nunca mais volto para esse lugar. Não recomendaria nem para o meu pior inimigo desse universo. Não venha, repito não venha nunca nesse lugar fedorento.</p>
-                    <p className="text-sm text-gray-500 mt-2">há 2 dias</p>
+       <main className="w-full min-h-screen flex flex-col items-center justify-start ">
+            <Cabecalho navLinks={navLinks} />
+            <BarraTitulo titulo={unidade.titulo} />
+            <div className="flex bg-verdeEscuro w-3/5 p-8">
+                <div className="flex w-2/5 mr-8">
+                    <Image
+                        src={unidade.imagem}
+                        alt={unidade.titulo}
+                        width={400}
+                        height={300}
+                        className="rounded-lg shadow-lg"
+                    />
+                </div>
+                <div className="flex flex-col justify-center  w-3/5 ">
+                    <h2 className="text-2xl font-bold text-white mb-4">{unidade.titulo}</h2>
+                    <span></span>
+                    <p className="mb-2">Endereço: {unidade.endereco}</p>
+                    <p className="mb-2">Telefone: {unidade.telefone}</p>
+                    <p className="mb-2">Status: {unidade.status}</p>
+                    <p className="mb-2">Última atualização: {unidade.ultimaAtualizacao}</p>
                 </div>
             </div>
-        </main>
-        
+       </main>
     );
 }
