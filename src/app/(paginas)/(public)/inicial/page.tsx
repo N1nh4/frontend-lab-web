@@ -19,6 +19,7 @@ import Image from "next/image";
 import { Search, User, Maximize2 } from "lucide-react";
 import { TbStar, TbStarFilled, TbStarHalfFilled } from "react-icons/tb";
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/router";
 
 export default function Inicial() {
   const navLinks = [
@@ -29,6 +30,9 @@ export default function Inicial() {
     { id: 5, label: 'Sobre nos', href: '/sobre-nos' },
     { id: 6, label: 'Criar conta', href: '/criar-conta' },
   ];
+
+  // Hook para navegação para paginas de detalhes da unidade
+  const router = useRouter();
 
   // Lógica para a barra de pesquisa mudar de tamanho quando se torna sticky
   const searchBarRef = useRef<HTMLDivElement>(null);
@@ -426,7 +430,10 @@ const renderUserIcons = (status: string) => {
           >
             <Maximize2 
               className="absolute top-2 right-2 cursor-pointer" 
-              size={18} />
+              size={18} 
+              onClick={() => router.push(`/unidades/${card.id}`)} // Navega para a página de detalhes
+              
+            />
             <CardContent className="flex flex-row flex-grow">
               <div className="flex flex-row items-center w-full justify-center ">
                 <Image
