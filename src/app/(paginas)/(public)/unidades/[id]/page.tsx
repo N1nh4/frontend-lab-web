@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 import React from "react"; 
 import Image from "next/image";
 import { UnidadeSaude, allUnidadesData } from '@/data/unidades'; 
-import { renderStars } from "@/lib/utils/rendering";
+import { renderStars, renderUserIcons } from "@/lib/utils/rendering";
 
 export default function UnidadeDetalhesPage() {
     const navLinks = [
@@ -40,7 +40,7 @@ export default function UnidadeDetalhesPage() {
        <main className="w-full min-h-screen flex flex-col items-center justify-start ">
             <Cabecalho navLinks={navLinks} />
             <BarraTitulo titulo={unidade.titulo} />
-            <div className="flex bg-verdeEscuro w-3/5 p-8">
+            <div className="flex  w-3/5 p-8 text-verdeEscuro">
                 <div className="flex w-2/5 mr-8">
                     <Image
                         src={unidade.imagem}
@@ -50,15 +50,18 @@ export default function UnidadeDetalhesPage() {
                         className="rounded-lg shadow-lg"
                     />
                 </div>
-                <div className="flex flex-col justify-center  w-3/5 ">
-                    <h2 className="text-2xl font-bold text-white mb-4">{unidade.titulo}</h2>
+                <div className="flex flex-col justify-center text-lg  w-3/5 ">
+                    <h2 className="text-2xl font-bold  mb-4">{unidade.titulo}</h2>
                     <div className="flex items-center mb-4">
-                        {renderStars(unidade.avaliacaoEstrela)}
+                        {renderStars(unidade.avaliacaoEstrela, 24)}
                     </div>
-                    <p className="mb-2">Endereço: {unidade.endereco}</p>
-                    <p className="mb-2">Telefone: {unidade.telefone}</p>
-                    <p className="mb-2">Status: {unidade.status}</p>
-                    <p className="mb-2">Última atualização: {unidade.ultimaAtualizacao}</p>
+                    <p className="mb-2"><span className="font-bold">Endereço:</span> {unidade.endereco}</p>
+                    <p className="mb-2"><span className="font-bold">Telefone:</span> {unidade.telefone}</p>
+                    <p className="mb-2 font-bold">Status: {unidade.status}</p>
+                  
+                    <span className="flex">{renderUserIcons(unidade.status, 32)}</span>
+                    <p className="italic text-xs"> {unidade.ultimaAtualizacao}</p>
+                    
                 </div>
             </div>
        </main>
