@@ -1,14 +1,12 @@
-'use client'; // Mantemos 'use client' porque usamos useParams
+'use client'; 
 
 import BarraTitulo from "@/components/barraTitulo";
 import Cabecalho from "@/components/cabecalho";
 import { useParams } from "next/navigation";
-import React from "react"; // Não precisamos de useState/useEffect por enquanto
+import React from "react"; 
 import Image from "next/image";
-
-// Importe suas interfaces e o StatusEnum do seu arquivo de dados mockados
 import { UnidadeSaude, allUnidadesData } from '@/data/unidades'; 
-// As funções renderStars, renderUserIcons, etc., não serão incluídas nesta versão básica
+import { renderStars } from "@/lib/utils/rendering";
 
 export default function UnidadeDetalhesPage() {
     const navLinks = [
@@ -54,7 +52,9 @@ export default function UnidadeDetalhesPage() {
                 </div>
                 <div className="flex flex-col justify-center  w-3/5 ">
                     <h2 className="text-2xl font-bold text-white mb-4">{unidade.titulo}</h2>
-                    <span></span>
+                    <div className="flex items-center mb-4">
+                        {renderStars(unidade.avaliacaoEstrela)}
+                    </div>
                     <p className="mb-2">Endereço: {unidade.endereco}</p>
                     <p className="mb-2">Telefone: {unidade.telefone}</p>
                     <p className="mb-2">Status: {unidade.status}</p>

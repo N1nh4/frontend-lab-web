@@ -33,7 +33,7 @@ export const allUnidadesData: UnidadeSaude[] = [
     {
       id: 2,
       titulo: "UPA 24h",
-      avaliacaoEstrela: 4.0,
+      avaliacaoEstrela: 3.5,
       endereco: "Rua das Flores muito grande e loge de tudo, 123",
       telefone: "(71) 1234-5678",
       status: StatusEnum.POUCO_VAZIO,
