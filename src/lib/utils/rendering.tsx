@@ -7,7 +7,7 @@ import { User } from "lucide-react"; // lucide-react já tem tipos embutidos
 import { StatusEnum, StatusType } from '@/data/unidades'; // Caminho corrigido com '@/data'
 
 // Função para renderizar estrelas com base na avaliação
-export const renderStars = (avaliacao: number) => {
+export const renderStars = (avaliacao: number, iconSize: number = 18) => {
   const totalStars = 5;
   const stars = [];
 
@@ -16,16 +16,16 @@ export const renderStars = (avaliacao: number) => {
 
   // Renderiza estrelas cheias
   for (let i = 0; i < filledStars; i++) {
-    stars.push(<TbStarFilled key={`filled-${i}`} size={18} color="black" />);
+    stars.push(<TbStarFilled key={`filled-${i}`} size={iconSize} color="black" />);
   }
   // Renderiza meia estrela, se aplicável
   if (hasHalfStar) {
-    stars.push(<TbStarHalfFilled key={`half-star`} size={18} color="black" />);
+    stars.push(<TbStarHalfFilled key={`half-star`} size={iconSize} color="black" />);
   }
   // Renderiza estrelas vazias
   const emptyStarsCount = totalStars - stars.length;
   for (let i = 0; i < emptyStarsCount; i++) {
-    stars.push(<TbStar key={`empty-${i}`} size={18} color="black" />);
+    stars.push(<TbStar key={`empty-${i}`} size={iconSize} color="black" />);
   }
   return stars;
 };
@@ -54,7 +54,7 @@ export const getCapacityFromStatus = (status: StatusType) => {
 };
 
 // Renderiza os ícones de usuário com base no status
-export const renderUserIcons = (status: StatusType) => {
+export const renderUserIcons = (status: StatusType, iconSize: number = 18) => {
   const totalIcons = 5;
   const userIcons = [];
 
@@ -65,13 +65,13 @@ export const renderUserIcons = (status: StatusType) => {
 
   for (let i = 0; i < capacidade; i++) {
     userIcons.push(
-      <User key={`user-filled-${i}`} size={18} className={filledColorClass} fill="currentColor" />
+      <User key={`user-filled-${i}`} size={iconSize} className={filledColorClass} fill="currentColor" />
     );
   }
   const emptyIconsCount = totalIcons - userIcons.length;
   for (let i = 0; i < emptyIconsCount; i++) {
     userIcons.push(
-      <User key={`user-empty-${i}`} size={18} fill="none" stroke={emptyColor} strokeWidth={1.5} />
+      <User key={`user-empty-${i}`} size={iconSize} fill="none" stroke={emptyColor} strokeWidth={1.5} />
     );
   }
   return userIcons;
