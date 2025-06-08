@@ -19,7 +19,7 @@ import Image from "next/image";
 import { Search, User, Maximize2 } from "lucide-react";
 import { TbStar, TbStarFilled, TbStarHalfFilled } from "react-icons/tb";
 import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function Inicial() {
   const navLinks = [
