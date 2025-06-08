@@ -16,10 +16,11 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { Search, User, Maximize2 } from "lucide-react";
-import { TbStar, TbStarFilled, TbStarHalfFilled } from "react-icons/tb";
+import { Search, Maximize2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { allUnidadesData } from "@/data/unidades";
+import { renderStars, renderUserIcons } from "@/lib/utils/rendering";
 
 export default function Inicial() {
   const navLinks = [
@@ -60,137 +61,6 @@ export default function Inicial() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isSearchBarSticky]);
 
-  const StatusEnum = {
-    VAZIO: "VAZIO",
-    POUCO_VAZIO: "POUCO VAZIO",
-    MODERADO: "MODERADO",
-    CHEIO: "CHEIO",
-    MUITO_CHEIO: "MUITO CHEIO",
-  }
-
-  const cards = [
-    {
-      id: 1,
-      titulo: "UPA 24h",
-      avaliacaoEstrela: 4.0,
-      endereco: "Rua das Flores muito grande e loge de tudo, 123",
-      telefone: "(71) 1234-5678",
-      status: StatusEnum.VAZIO,
-      ultimaAtualizacao: "ultima atualização há 2 horas",
-      imagem: "/images/upa.png",
-    },
-    {
-      id: 2,
-      titulo: "Unidade de Pronto Atendimento (UPA)",
-      avaliacaoEstrela: 3.5,
-      endereco: "Avenida Central, 456",
-      telefone: "(71) 9876-5432",
-      status: StatusEnum.MUITO_CHEIO,
-      ultimaAtualizacao: "2023-10-02",
-      imagem: "/images/upa.png",
-    },
-    {
-      id: 3,
-      titulo: "Clínica da Família",
-      avaliacaoEstrela: 4.5,
-      endereco: "Travessa da Saúde, 789",
-      telefone: "(71) 5555-5555",
-      status: StatusEnum.MODERADO,
-      ultimaAtualizacao: "2023-10-03",
-      imagem: "/images/upa.png",
-    },
-    {
-      id: 1,
-      titulo: "UPA 24h",
-      avaliacaoEstrela: 4.0,
-      endereco: "Rua das Flores, 123",
-      telefone: "(71) 1234-5678",
-      status: StatusEnum.CHEIO,
-      ultimaAtualizacao: "2023-10-01",
-      imagem: "/images/upa.png",
-    },
-    {
-      id: 2,
-      titulo: "Hospital Municipal",
-      avaliacaoEstrela: 3.5,
-      endereco: "Avenida Central, 456",
-      telefone: "(71) 9876-5432",
-      status: StatusEnum.POUCO_VAZIO,
-      ultimaAtualizacao: "2023-10-02",
-      imagem: "/images/upa.png",
-    },
-    {
-      id: 3,
-      titulo: "Clínica da Família",
-      avaliacaoEstrela: 4.5,
-      endereco: "Travessa da Saúde, 789",
-      telefone: "(71) 5555-5555",
-      status: StatusEnum.POUCO_VAZIO,
-      ultimaAtualizacao: "2023-10-03",
-      imagem: "/images/upa.png",
-    },
-    {
-      id: 3,
-      titulo: "Clínica da Família",
-      avaliacaoEstrela: 4.5,
-      endereco: "Travessa da Saúde, 789",
-      telefone: "(71) 5555-5555",
-      status: StatusEnum.MODERADO,
-      ultimaAtualizacao: "2023-10-03",
-      imagem: "/images/upa.png",
-    },
-    {
-      id: 3,
-      titulo: "Clínica da Família",
-      avaliacaoEstrela: 4.5,
-      endereco: "Travessa da Saúde, 789",
-      telefone: "(71) 5555-5555",
-      status: StatusEnum.MODERADO,
-      ultimaAtualizacao: "2023-10-03",
-      imagem: "/images/upa.png",
-    },
-    {
-      id: 1,
-      titulo: "UPA 24h",
-      avaliacaoEstrela: 4.0,
-      endereco: "Rua das Flores, 123",
-      telefone: "(71) 1234-5678",
-      status: StatusEnum.CHEIO,
-      ultimaAtualizacao: "2023-10-01",
-      imagem: "/images/upa.png",
-    },
-    {
-      id: 2,
-      titulo: "Hospital Municipal",
-      avaliacaoEstrela: 3.5,
-      endereco: "Avenida Central, 456",
-      telefone: "(71) 9876-5432",
-      status: StatusEnum.POUCO_VAZIO,
-      ultimaAtualizacao: "2023-10-02",
-      imagem: "/images/upa.png",
-    },
-    {
-      id: 3,
-      titulo: "Clínica da Família",
-      avaliacaoEstrela: 4.5,
-      endereco: "Travessa da Saúde, 789",
-      telefone: "(71) 5555-5555",
-      status: StatusEnum.POUCO_VAZIO,
-      ultimaAtualizacao: "2023-10-03",
-      imagem: "/images/upa.png",
-    },
-    {
-      id: 3,
-      titulo: "Clínica da Família",
-      avaliacaoEstrela: 4.5,
-      endereco: "Travessa da Saúde, 789",
-      telefone: "(71) 5555-5555",
-      status: StatusEnum.MODERADO,
-      ultimaAtualizacao: "2023-10-03",
-      imagem: "/images/upa.png",
-    },
-   
-  ]
 
   const shadowStyle = {
     boxShadow: "5px 5px 4px rgba(0, 0, 0, 0.25)",
@@ -202,97 +72,6 @@ export default function Inicial() {
 
   const cardWidth = "w-[700px]";
   const cardHeight = "h-[200px]"; 
-
-// Função para renderizar estrelas com base na avaliação
-
-  const renderStars = (avaliacao: number) => {
-  const totalStars = 5;
-  const stars = [];
-
-  const filledStars = Math.floor(avaliacao); // Estrelas cheias (ex: 4 para 4.0, 3 para 3.5)
-  const hasHalfStar = (avaliacao % 1) >= 0.5; // Verifica se a parte decimal é 0.5 ou mais
-
-  // Renderiza estrelas cheias
-  for (let i = 0; i < filledStars; i++) {
-    stars.push(<TbStarFilled key={`filled-${i}`} size={18} color="black" />);
-  }
-
-  // Renderiza meia estrela, se aplicável
-  if (hasHalfStar) {
-    stars.push(<TbStarHalfFilled key={`half-star`} size={18} color="black" />);
-  }
-
-  // Renderiza estrelas vazias
-  const emptyStarsCount = totalStars - stars.length; // Quantas estrelas ainda faltam para completar 5
-  for (let i = 0; i < emptyStarsCount; i++) {
-    stars.push(<TbStar key={`empty-${i}`} size={18} color="black" />);
-  }
-
-  return stars;
-};
-
-// Mapeia o status para quantidade de ícones de usuário e suas cores
-const getStatusColorLotacao = (status: string) => {
-  switch (status) {
-    case StatusEnum.VAZIO:
-      return "text-emerald-500";
-    case StatusEnum.POUCO_VAZIO:
-      return "text-emerald-500";
-    case StatusEnum.MODERADO:
-      return "text-amber-500";
-    case StatusEnum.CHEIO:
-      return "text-red-500";
-    case StatusEnum.MUITO_CHEIO:
-      return "text-red-500";
-    default:
-      return "text-zinc-500";
-  }
-};
-
-const getCapacityFromStatus = (status: string) => {
-  switch (status) {
-    case StatusEnum.VAZIO:
-      return 1;
-    case StatusEnum.POUCO_VAZIO:
-      return 2;
-    case StatusEnum.MODERADO:
-      return 3;
-    case StatusEnum.CHEIO:
-      return 4;
-    case StatusEnum.MUITO_CHEIO:
-      return 5;
-    default:
-      return 0;
-  }
-};
-
-// Renderiza os ícones de usuário com base no status
-
-const renderUserIcons = (status: string) => {
-  const totalIcons = 5;
-  const userIcons = [];
-
-  const filledColorClass = getStatusColorLotacao(status);
-  const emptyColor = "gray"; // Cor para os ícones vazios
-
-  const capacidade = getCapacityFromStatus(status);
-
-  for (let i = 0; i < capacidade; i++) {
-    userIcons.push(
-      <User key={`user-filled-${i}`} size={18} className={filledColorClass} fill="currentColor" />
-    );
-  }
-
-  const emptyIconsCount = totalIcons - userIcons.length; // Quantas ícones ainda faltam para completar 5
-  for (let i = 0; i < emptyIconsCount; i++) {
-    userIcons.push(
-      <User key={`user-empty-${i}`} size={18} fill="none" stroke={emptyColor} strokeWidth={1.5} />
-    );
-  }
-  return userIcons;
-};
-    
- 
 
   return (
     <main className="w-full min-h-screen">
@@ -329,7 +108,6 @@ const renderUserIcons = (status: string) => {
                 </Button>
               </div>
             </CarouselItem>
-
 
             <CarouselItem className={`pl-20 basis-auto`}>
               <div className={`p-6 bg-white rounded-2xl shadow-sm ${cardWidth} ${cardHeight} flex flex-col justify-between`} style={shadowStyle}>
@@ -423,7 +201,7 @@ const renderUserIcons = (status: string) => {
 
       {/* Cards de unidades de saúde */}
       <div className="grid grid-cols-3 pl-10 pr-10 place-items-center justify-center mt-8">
-        {cards.map((card, id) => (
+        {allUnidadesData.map((card, id) => (
           <Card
             key={card.id}
             className= "flex flex-col relative bg-verdePastel w-11/12  mx-4 rounded-lg mb-6 shadow-[5px_5px_4px_rgba(0,0,0,0.25)] "
@@ -468,8 +246,6 @@ const renderUserIcons = (status: string) => {
         ))}
       </div>
 
-      
-      
     </main>
   );
 }
