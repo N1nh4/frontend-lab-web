@@ -9,6 +9,8 @@ import { UnidadeSaude, allUnidadesData, Comentario } from '@/data/unidades';
 import { renderStars, renderUserIcons } from "@/lib/utils/rendering";
 import { Info, User, UserRound } from "lucide-react";
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogTitle, AlertDialogTrigger, AlertDialogFooter, AlertDialogHeader } from "@/components/ui/alert-dialog";
+import Avatar from '@mui/material/Avatar';
+import AvatarGroup from '@mui/material/AvatarGroup';
 
 export default function UnidadeDetalhesPage() {
     const navLinks = [
@@ -127,7 +129,17 @@ export default function UnidadeDetalhesPage() {
             </div>
 
             <div className="mt-8 pt-8 border-t border-gray-200 w-4/5 p-20">
-                <h2 className="text-2xl font-bold text-verdeEscuro mb-4">Comentários</h2>
+                <div className="flex items-center mb-4 gap-4">
+                    <h2 className="flex text-2xl font-bold text-verdeEscuro mb-4">Comentários</h2>
+                    <AvatarGroup max={4}>
+                        <Avatar sx={{ width: 32, height: 32 }} alt="Usuario 1" src="/images/upa.png"/>
+                        <Avatar sx={{ width: 32, height: 32 }} alt="Usuario 2" src="/images/upa.png"/>
+                        <Avatar sx={{ width: 32, height: 32 }} alt="Usuario 3" src="/images/upa.png"/>
+                        <Avatar sx={{ width: 32, height: 32 }} alt="Usuario 1" src="/images/upa.png"/>
+                        <Avatar sx={{ width: 32, height: 32 }} alt="Usuario 2" src="/images/upa.png"/>
+                        <Avatar sx={{ width: 32, height: 32 }} alt="Usuario 3" src="/images/upa.png"/>
+                    </AvatarGroup>
+                </div>
                 { /* Área de comentários */}
                 <div className="flex ">
                     <div className="flex items-center justify-center rounded-full w-12 h-12 bg-gray-200 ">
