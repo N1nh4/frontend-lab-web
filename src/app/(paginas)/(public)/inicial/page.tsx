@@ -1,3 +1,4 @@
+'use client';
 import Cabecalho from "@/components/cabecalho";
 import {
   Carousel,
@@ -15,7 +16,11 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { Search, Star, User, Maximize2 } from "lucide-react";
+import { Search, Maximize2 } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { allUnidadesData } from "@/data/unidades";
+import { renderStars, renderUserIcons } from "@/lib/utils/rendering";
 
 export default function Inicial() {
   const navLinks = [
@@ -27,92 +32,35 @@ export default function Inicial() {
     { id: 6, label: 'Criar conta', href: '/criar-conta' },
   ];
 
-  const StatusEnum = {
-    CHEIO: "CHEIO",
-    VAZIO: "VAZIO",
-    MODERADO: "MODERADO",
-  }
+  // Hook para navegação para paginas de detalhes da unidade
+  const router = useRouter();
 
-  const cards = [
-    {
-      id: 1,
-      titulo: "UPA 24h",
-      avaliacaoEstrela: 4.0,
-      endereco: "Rua das Flores, 123",
-      telefone: "(71) 1234-5678",
-      status: StatusEnum.CHEIO,
-      capacidade: 3.0,
-      ultimaAtualizacao: "ultima atualização há 2 horas",
-      imagem: "/images/upa.jpeg",
-    },
-    {
-      id: 2,
-      titulo: "Hospital Municipal",
-      avaliacaoEstrela: 3.5,
-      endereco: "Avenida Central, 456",
-      telefone: "(71) 9876-5432",
-      status: StatusEnum.VAZIO,
-      capacidade: 1.0,
-      ultimaAtualizacao: "2023-10-02",
-      imagem: "/images/upa.jpeg",
-    },
-    {
-      id: 3,
-      titulo: "Clínica da Família",
-      avaliacaoEstrela: 4.5,
-      endereco: "Travessa da Saúde, 789",
-      telefone: "(71) 5555-5555",
-      status: StatusEnum.MODERADO,
-      capacidade: 2.0,
-      ultimaAtualizacao: "2023-10-03",
-      imagem: "/images/upa.jpeg",
-    },
-    {
-      id: 1,
-      titulo: "UPA 24h",
-      avaliacaoEstrela: 4.0,
-      endereco: "Rua das Flores, 123",
-      telefone: "(71) 1234-5678",
-      status: StatusEnum.CHEIO,
-      capacidade: 3.0,
-      ultimaAtualizacao: "2023-10-01",
-      imagem: "/images/upa.jpeg",
-    },
-    {
-      id: 2,
-      titulo: "Hospital Municipal",
-      avaliacaoEstrela: 3.5,
-      endereco: "Avenida Central, 456",
-      telefone: "(71) 9876-5432",
-      status: StatusEnum.VAZIO,
-      capacidade: 1.0,
-      ultimaAtualizacao: "2023-10-02",
-      imagem: "/images/upa.jpeg",
-    },
-    {
-      id: 3,
-      titulo: "Clínica da Família",
-      avaliacaoEstrela: 4.5,
-      endereco: "Travessa da Saúde, 789",
-      telefone: "(71) 5555-5555",
-      status: StatusEnum.MODERADO,
-      capacidade: 2.0,
-      ultimaAtualizacao: "2023-10-03",
-      imagem: "/images/upa.jpeg",
-    },
-    {
-      id: 3,
-      titulo: "Clínica da Família",
-      avaliacaoEstrela: 4.5,
-      endereco: "Travessa da Saúde, 789",
-      telefone: "(71) 5555-5555",
-      status: StatusEnum.MODERADO,
-      capacidade: 2.0,
-      ultimaAtualizacao: "2023-10-03",
-      imagem: "/images/upa.jpeg",
-    },
-   
-  ]
+  // Lógica para a barra de pesquisa mudar de tamanho quando se torna sticky
+  const searchBarRef = useRef<HTMLDivElement>(null);
+  const [isSearchBarSticky, setIsSearchBarSticky] = useState(false);
+
+  useEffect(() => {
+    console.log('searchBarRef.current na montagem do useEffect:', searchBarRef.current);
+    const handleScroll = () => {
+      if (searchBarRef.current) {
+        const rect = searchBarRef.current.getBoundingClientRect();
+        const stickyThreshold = 64;
+        const newIsSticky = rect.top <= stickyThreshold; 
+        
+        console.log(`handleScroll: rect.top = ${rect.top}, newIsSticky = ${newIsSticky}, currentIsSticky = ${isSearchBarSticky}`);
+        if (newIsSticky !== isSearchBarSticky) {
+          setIsSearchBarSticky(newIsSticky);
+          console.log("MUDANÇA DE ESTADO: Barra de pesquisa sticky para:", newIsSticky); // <-- Esta mensagem deve aparecer quando o estado muda
+        }
+      } else {
+         console.log("searchBarRef.current é NULO dentro do handleScroll. Elemento não encontrado.");
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isSearchBarSticky]);
+
 
   const shadowStyle = {
     boxShadow: "5px 5px 4px rgba(0, 0, 0, 0.25)",
@@ -122,9 +70,8 @@ export default function Inicial() {
     boxShadow: "4px 8px 15px rgba(0, 0, 0, 0.25)"
   }
 
-
-  const cardWidth = "w-[775px]";
-  const cardHeight = "h-[190px]"; 
+  const cardWidth = "w-[700px]";
+  const cardHeight = "h-[200px]"; 
 
   return (
     <main className="w-full min-h-screen">
@@ -162,7 +109,6 @@ export default function Inicial() {
               </div>
             </CarouselItem>
 
-
             <CarouselItem className={`pl-20 basis-auto`}>
               <div className={`p-6 bg-white rounded-2xl shadow-sm ${cardWidth} ${cardHeight} flex flex-col justify-between`} style={shadowStyle}>
                 <div>
@@ -180,9 +126,9 @@ export default function Inicial() {
                 className={`p-10 bg-[#106A43] rounded-2xl shadow-sm text-white ${cardWidth} ${cardHeight} flex flex-row justify-between items-center overflow-visible`}
                 style={shadowStyle}
               >
-                <div className="flex flex-col w-1/2 ">
-                  <h1 className="text-5xl font-semibold mb-6">Objetivo 3: Saúde e Bem-Estar</h1>
-                  <p className="text-2xl mb-4 ">Contribuindo para os Objetivos de Desenvolvimento Sustentável.</p>
+                <div className="flex flex-col w-3/5 ">
+                  <h1 className="text-3xl font-semibold mb-2">Objetivo 3: Saúde e Bem-Estar</h1>
+                  <p className="text-xl mb-4 ">Contribuindo para os Objetivos de Desenvolvimento Sustentável.</p>
                 </div>
                 <div className="flex justify-end w-1/2">
                   <Image
@@ -213,24 +159,34 @@ export default function Inicial() {
         </Carousel>
       </div>
 
-      {/* Barra de pesquisa */} 
+       {/* Barra de pesquisa */} 
+       
       <div 
-        className="flex w-full items-center h-24 bg-verdeEscuro"
+        ref={searchBarRef} 
+        className={`sticky top-16 z-50 flex w-full items-center bg-verdeEscuro transition-all duration-300 ${
+          isSearchBarSticky ? 'h-16' : 'h-24' 
+        }`}
         style={shadowSearch}
       >
-          <div className="flex items-center justify-start pl-40 h-full text-white text-2xl font-semibold">
+        <div className={`flex items-center justify-start pl-32 text-white font-semibold transition-all duration-300 ${
+            isSearchBarSticky ? 'text-xl' : 'text-2xl h-full' 
+        }`}>
             <h1>EMERGÊNCIAS E UPAS</h1>
-          </div>
-          <div className="flex items-center w-6/12 justify-end h-full">
+        </div>
+        <div className="flex items-center w-6/12 justify-end h-full">
             <input
-              type="text"
-              placeholder="Pesquisar por nome da unidade de saúde..."
-              className=" w-3/4 h-12 px-4 bg-white text-xs rounded-l-lg focus:outline-none focus:ring-2 focus:ring-verdeClaro"
+                type="text"
+                placeholder="Pesquisar por nome da unidade de saúde..."
+                className={`w-3/4 px-4 bg-white text-xs rounded-l-lg focus:outline-none focus:ring-2 focus:ring-verdeClaro transition-all duration-300 ${
+                    isSearchBarSticky ? 'h-9' : 'h-12' 
+                }`}
             />
-            <button className="flex items-center justify-center h-12 w-15 bg-verdeClaro  text-white rounded-r-lg">
-              <Search />
+            <button className={`flex items-center justify-center w-15 bg-verdeClaro text-white rounded-r-lg transition-all duration-300 ${
+                isSearchBarSticky ? 'h-9' : 'h-12' // Altura do botão
+            }`}>
+                <Search />
             </button>
-          </div>
+        </div>
       </div>
 
       {/* Filtro das unidades de saúde */} 
@@ -244,49 +200,52 @@ export default function Inicial() {
       </div>
 
       {/* Cards de unidades de saúde */}
-      <div className="grid grid-cols-3 pl-10 pr-10 place-items-center justify-center  mt-8">
-        {cards.map((card, id) => (
+      <div className="grid grid-cols-3 pl-10 pr-10 place-items-center justify-center mt-8">
+        {allUnidadesData.map((card, id) => (
           <Card
             key={card.id}
-            className= "flex flex-col bg-verdePastel w-11/12 h-80 m-4  rounded-lg "
+            className= "flex flex-col relative bg-verdePastel w-11/12  mx-4 rounded-lg mb-6 shadow-[5px_5px_4px_rgba(0,0,0,0.25)] "
           >
+            <Maximize2 
+              className="absolute top-2 right-2 cursor-pointer" 
+              size={18} 
+              onClick={() => router.push(`/unidades/${card.id}`)} // Navega para a página de detalhes
+              
+            />
             <CardContent className="flex flex-row flex-grow">
-              <div className="flex flex-row items-center w-2/3 justify-center mb-4">
+              <div className="flex flex-row items-center w-full justify-center ">
                 <Image
                   src={card.imagem}
                   alt={card.titulo}
                   width={300}
                   height={300}
+                  
                   />
               </div>
-              <div className="flex flex-col w-full justify-center text-justify pl-8">
-                <div className="flex items-end justify-between w-full mb-2">
-                  <h1>{card.titulo}</h1>
-                  <Maximize2/>
+              <div className="flex flex-col text-verdeEscuro w-11/12 justify-center text-justify pl-4 gap-y-1">
+                <div className="flex items-end justify-between w-full">
+                  <h1 className="text-base text-left font-bold gap-y-0 leading-none">{card.titulo}</h1>
+                  
                 </div>
-                <p>Endereço: {card.endereco}</p>
-                <div className="flex items-center mb-2">
-                  {Array.from({ length: Math.floor(card.avaliacaoEstrela) }).map((_, i) => (
-                    <Star stroke="0.5" fill="black" key={i} className="" />
-                  ))}
+                <div className="flex items-center ">
+                  {renderStars(card.avaliacaoEstrela)}
                 </div>
-                <p>Telefone: {card.telefone}</p>
-                <p className="font-bold">Status: {card.status}</p>
-                <div className="flex items-center mb-2">
-                  <User className="text-red-600"/><User /><User /><User /><User />
+                <p className="text-xs "><span className="font-bold">Endereço:</span> {card.endereco}</p>
+                <p className="text-xs  "><span className="font-bold">Telefone:</span> {card.telefone}</p>
+                <p className="font-bold text-sm ">Status: {card.status}</p>
+                <div className="flex items-center " >
+                  {renderUserIcons(card.status)}
                 </div>
-                <span className="text-">{card.ultimaAtualizacao}</span>
+                <span className="text-xs italic">{card.ultimaAtualizacao}</span>
               </div>
             </CardContent>
             <CardFooter className="flex p-0">
-            <button className="bg-verdeEscuro  w-full text-white py-2 px-4 rounded-b-lg ">REGISTRAR LOTAÇÃO</button>
+            <button className="bg-verdeEscuro w-full text-white py-2 px-4 rounded-b-lg ">REGISTRAR LOTAÇÃO</button>
             </CardFooter>
           </Card>
         ))}
       </div>
 
-      
-      
     </main>
   );
 }
