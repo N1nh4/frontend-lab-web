@@ -17,7 +17,17 @@ export interface UnidadeSaude {
     status: StatusType;
     ultimaAtualizacao: string;
     imagem: string;
+    comentarios?: Comentario[];
   }
+
+export interface Comentario {
+    id: number;
+    unidadeId: number; 
+    autor: string;
+    avatar?: string;
+    texto: string;
+    data: string;
+}
 
 export const allUnidadesData: UnidadeSaude[] = [
     {
@@ -29,6 +39,33 @@ export const allUnidadesData: UnidadeSaude[] = [
       status: StatusEnum.VAZIO,
       ultimaAtualizacao: "ultima atualização há 2 horas",
       imagem: "/images/upa.png",
+      comentarios: [
+        {
+          id: 1,
+          unidadeId: 1, // Associando o comentário à unidade
+          autor: "João Silva",
+          avatar: "",
+          texto: "Ótimo atendimento, muito rápido!",
+          data: "2023-10-01 14:30",
+        },
+        {
+          id: 2,
+          unidadeId: 1, // Associando o comentário à unidade
+          autor: "Maria Oliveira",
+          avatar: "/images/avatar2.png",
+          texto: "Ambiente limpo e organizado.",
+          data: "2023-10-01 15:00",
+        },
+        {
+          id: 3,
+          unidadeId: 1, // Associando o comentário à unidade
+          autor: "Hugo",
+          avatar: "/images/avatar2.png",
+          texto: "teste",
+          data: "2023-10-01 15:00",
+        }
+
+      ]
     },
     {
       id: 2,
@@ -39,6 +76,7 @@ export const allUnidadesData: UnidadeSaude[] = [
       status: StatusEnum.POUCO_VAZIO,
       ultimaAtualizacao: "ultima atualização há 2 horas",
       imagem: "/images/upa.png",
+      comentarios: [],
     },
     {
       id: 3,

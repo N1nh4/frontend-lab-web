@@ -3,11 +3,11 @@
 import BarraTitulo from "@/components/barraTitulo";
 import Cabecalho from "@/components/cabecalho";
 import { useParams } from "next/navigation";
-import React from "react"; 
+import React, { useState } from "react"; 
 import Image from "next/image";
-import { UnidadeSaude, allUnidadesData } from '@/data/unidades'; 
+import { UnidadeSaude, allUnidadesData, Comentario } from '@/data/unidades'; 
 import { renderStars, renderUserIcons } from "@/lib/utils/rendering";
-import { Info, User } from "lucide-react";
+import { Info, User, UserRound } from "lucide-react";
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogTitle, AlertDialogTrigger, AlertDialogFooter, AlertDialogHeader } from "@/components/ui/alert-dialog";
 
 export default function UnidadeDetalhesPage() {
@@ -37,11 +37,37 @@ export default function UnidadeDetalhesPage() {
         );
     }
 
+    const [comentariosLocais, setComentariosLocais] = useState<Comentario[]>(unidade.comentarios || []);
+    const [novoComentarioTexto, setNovoComentarioTexto] = useState('');
+
+    const handleAddComentario = () => {
+        if (novoComentarioTexto.trim() === '') {
+            alert('Por favor, digite um comentário.');
+            return;
+        }
+
+        const novoComentario: Comentario = {
+            id: Date.now(), // Gera um ID único baseado no timestamp
+            unidadeId: unidade.id, // Associa o comentário à unidade
+            autor: 'Usuário Anônimo',
+            avatar: '', // Você pode adicionar um avatar aqui se quiser
+            texto: novoComentarioTexto.trim(),
+            data: "agora mesmo", // Formata a data atual
+        };
+
+        setComentariosLocais(prevComentarios => [...prevComentarios, novoComentario]);
+        setNovoComentarioTexto(''); // Limpa o campo de texto após adicionar o comentário
+    };
+
+    const handleCancelarComentario = () => {
+        setNovoComentarioTexto(''); // Limpa o campo de texto
+    };
+
     // Renderiza a unidade
     return (
        <main className="w-full min-h-screen flex flex-col items-center justify-start ">
             <Cabecalho navLinks={navLinks} />
-            <BarraTitulo titulo={unidade.titulo} />
+            <BarraTitulo titulo="Destaque" />
             <div className="flex  w-3/5 p-8 text-verdeEscuro">
                 <div className="flex w-2/5 mr-8">
                     <Image
@@ -99,8 +125,52 @@ export default function UnidadeDetalhesPage() {
                     <button className="mt-4 h-10 font-bold bg-verdeEscuro text-white rounded-lg">RESGISTRAR LOTAÇÃO</button>
                 </div>
             </div>
-            <div>
-                
+
+            <div className="mt-8 pt-8 border-t border-gray-200 w-4/5 p-20">
+                <h2 className="text-2xl font-bold text-verdeEscuro mb-4">Comentários</h2>
+                { /* Área de comentários */}
+                <div className="flex ">
+                    <div className="flex items-center justify-center rounded-full w-12 h-12 bg-gray-200 ">
+                        <UserRound />
+                    </div>
+                    <textarea
+                        placeholder="Adicione um comentário..."
+                        className="w-full ml-4 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-verdeClaro resize-y min-h-[40px] text-gray-700"
+                        value={novoComentarioTexto}
+                        onChange={(e) => setNovoComentarioTexto(e.target.value)}
+                    ></textarea>  
+                </div>
+                <div className="flex my-4 justify-end gap-2"> {/* Botões */}
+                    <button 
+                        className="px-3 py-1 text-sm text-gray-700 hover:text-gray-900 rounded-md"
+                        onClick={handleCancelarComentario} // Lógica para cancelar
+                    >
+                        Cancelar
+                    </button>
+                    <button 
+                        className="px-3 py-1 text-sm bg-[#106A43] text-white rounded-md hover:bg-[#0c5033]"
+                        onClick={handleAddComentario} // Lógica para adicionar
+                    >
+                        Enviar
+                    </button>
+                </div>
+                <div>
+                    {/* Lista de Comentários Existentes */}
+                    {comentariosLocais.length > 0 ? (
+                        comentariosLocais.map(comentario => (
+                            <div key={comentario.id} className="flex items-start mb-6 p-4 border rounded-lg bg-white shadow-sm">
+                                <User size={32} className="text-gray-500 mr-3 mt-1" />
+                                <div>
+                                    <p className="font-bold text-lg text-gray-900">{comentario.autor}</p>
+                                    <p className="text-gray-800 mt-1">{comentario.texto}</p>
+                                    <p className="text-sm text-gray-500 mt-2">{comentario.data}</p>
+                                </div>
+                            </div>
+                        ))
+                    ) : (
+                        <p className="text-gray-600">Nenhum comentário ainda. Seja o primeiro a comentar!</p>
+                    )}
+                </div>
             </div>
        </main>
     );
