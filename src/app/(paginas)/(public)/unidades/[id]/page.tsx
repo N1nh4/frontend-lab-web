@@ -22,6 +22,7 @@ export default function UnidadeDetalhesPage() {
         { id: 6, label: 'Criar conta', href: '/criar-conta' },
     ];
 
+    // Começar com o scroll na parte superior da página
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -73,7 +74,7 @@ export default function UnidadeDetalhesPage() {
     return (
        <main className="w-full min-h-screen flex flex-col items-center justify-start ">
             <Cabecalho navLinks={navLinks} />
-            <BarraTitulo titulo="Destaque" />
+            <BarraTitulo titulo="DETALHES DA UNIDADE" />
             <div className="flex  w-3/5 p-8 text-verdeEscuro">
                 <div className="flex w-2/5 mr-8">
                     <Image
