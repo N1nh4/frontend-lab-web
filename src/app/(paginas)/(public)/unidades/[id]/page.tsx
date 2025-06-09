@@ -3,7 +3,7 @@
 import BarraTitulo from "@/components/barraTitulo";
 import Cabecalho from "@/components/cabecalho";
 import { useParams } from "next/navigation";
-import React, { useState } from "react"; 
+import React, { useEffect, useState } from "react"; 
 import Image from "next/image";
 import { UnidadeSaude, allUnidadesData, Comentario } from '@/data/unidades'; 
 import { renderStars, renderUserIcons } from "@/lib/utils/rendering";
@@ -21,6 +21,10 @@ export default function UnidadeDetalhesPage() {
         { id: 5, label: 'Sobre nos', href: '/sobre-nos' },
         { id: 6, label: 'Criar conta', href: '/criar-conta' },
     ];
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     const params = useParams();
     const unidadeId = params.id; // Obter o ID da unidade a partir dos parâmetros da URL (vem como string)
