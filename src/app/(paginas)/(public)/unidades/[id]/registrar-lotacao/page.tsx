@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 import React, { useEffect } from "react"; 
 import Image from "next/image";
 import { allUnidadesData, UnidadeSaude } from '@/data/unidades'; 
-import { User } from "lucide-react";
+import { Clock, MapPinHouse, Phone, PhoneCall, User, Users } from "lucide-react";
 
 
 
@@ -44,7 +44,7 @@ export default function RegistrarLotacaoPage() {
             <BarraTitulo titulo={`REGISTRAR LOTAÇÃO `} /> 
 
             <div className="flex flex-col w-full flex-grow overflow-y-auto">
-                <div className="flex h-3/4 justify-between ">
+                <div className="flex h-2/3 justify-between ">
                     <div className="flex h-full ">
                         <Image 
                             src={"/images/upa.png"}
@@ -58,42 +58,42 @@ export default function RegistrarLotacaoPage() {
                     </div>
                     <div className="flex h-full">
                         <div className="flex flex-col justify-center py-8 gap-2 text-xl">
-                            <h1 className="text-verdeEscuro font-bold text-3xl">Informações da unidade</h1>
+                            <h1 className="text-verdeEscuro font-bold text-3xl mb-4">Informações da unidade</h1> 
                             <h2 className="text-verdeEscuro font-bold text-2xl">{unidade.titulo}</h2>
-                            <span>Endereço: {unidade.endereco}</span>
-                            <span>Telefone: {unidade.telefone}</span>
-                            <span className="font-bold">Status: {unidade.status}</span>
-                            <span className="italic">{unidade.ultimaAtualizacao}</span>
+                            <span className="flex items-center"> <span className="mr-2"> <MapPinHouse /> </span> Endereço: {unidade.endereco}</span>
+                            <span className="flex items-center"> <span className="mr-2"> <Phone /> </span> Telefone: {unidade.telefone}</span>
+                            <span className="flex items-center font-bold"> <span className="mr-2"> <Users /> </span> Status: {unidade.status}</span>
+                            <span className="italic flex items-center"> <span className="mr-2"> <Clock /> </span> {unidade.ultimaAtualizacao}</span>
                             
                         </div>
                     </div>
-                    <div className="flex flex-col bg-verdePastel shadow-md rounded-2xl  m-4">
-                        <span className="bg-[#0E6F4C] py-2 pl-4 text-white rounded-t-2xl font-bold">Como avaliar o Status de lotação?</span>
-                        <div className="flex flex-1 justify-center items-center">
-                            <ul className="flex flex-col justify-center  pl-5 p-4 gap-4 text-zinc-500 font-bold ">
-                                <li className="flex items-center gap-2"> <User stroke="#0E6F4C"/> VAZIO- está quase sem ninguém.</li>
-                                <li className="flex items-center gap-2"> <User stroke="#0E6F4C"/> POUCO VAZIO- está com pouca gente.</li>
-                                <li className="flex items-center gap-2"> <User stroke="#0E6F4C"/> MODERADO- está com quantidade <br /> moderada de pessoas.</li>
-                                <li className="flex items-center gap-2"> <User stroke="#0E6F4C"/> CHEIO- está cheio.</li>
-                                <li className="flex items-center gap-2"> <User stroke="#0E6F4C" /> MUITO CHEIO- está muito cheio.</li>
-                            </ul>
+                    <div className="flex justify-center items-center">
+                        <div className="flex flex-col bg-verdePastel shadow-md rounded-2xl  mr-10 m-4 max-h-80">
+                            <span className="bg-[#0E6F4C] py-2 pl-4 text-white rounded-t-2xl font-bold">Como avaliar o Status de lotação?</span>
+                            <div className="flex flex-1 justify-center items-center">
+                                <ul className="flex flex-col justify-center  pl-5 p-4 gap-4 text-zinc-500 font-bold ">
+                                    <li className="flex items-center gap-2"> <User stroke="#0E6F4C"/> VAZIO- está quase sem ninguém.</li>
+                                    <li className="flex items-center gap-2"> <User stroke="#0E6F4C"/> POUCO VAZIO- está com pouca gente.</li>
+                                    <li className="flex items-center gap-2"> <User stroke="#fe9a2e"/> MODERADO- está com quantidade <br /> moderada de pessoas.</li>
+                                    <li className="flex items-center gap-2"> <User stroke="#fb2c36"/> CHEIO- está cheio.</li>
+                                    <li className="flex items-center gap-2"> <User stroke="#fb2c36" /> MUITO CHEIO- está muito cheio.</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div className="bg-verdeEscuro h-1/2 px-8 py-4">
+                <div className="bg-verdeEscuro h-2/5 px-8 py-4 flex flex-col justify-between">
                     <span 
-                        className="italic text-white  text-2xl"
-                        
+                        className="italic text-white text-2xl"
                     >Confirme os dados da unidade e Selecione o Status de lotação:</span>
                     
-                    <div className="flex items-center justify-center gap-8 mt-6">
-                        <User size={64}/><User size={64}/><User size={64}/><User size={64}/><User size={64}/>
-                    </div>
-                    <div className="flex justify-center gap-12 mt-4">
+                    <div className="flex-grow flex items-center justify-center gap-8">
+                        <User stroke={"#0E6F4C"} size={64}/><User stroke={"#0E6F4C"} size={64}/><User stroke={"#999999"} size={64}/><User stroke={"#999999"} size={64}/><User stroke={"#999999"} size={64}/>    
+                    </div> 
+                    <div className="flex justify-center gap-12 "> 
                         <button className="bg-white text-verdeEscuro rounded-2xl h-12 w-48 font-bold">CANCELAR</button>
                         <button className="bg-white text-verdeEscuro rounded-2xl h-12 w-48 font-bold">ENVIAR</button>
                     </div>
-                     
                 </div>
             </div>
         </main>
