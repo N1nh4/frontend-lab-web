@@ -2,7 +2,7 @@
 
 import BarraTitulo from "@/components/barraTitulo";
 import Cabecalho from "@/components/cabecalho";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react"; 
 import Image from "next/image";
 import { UnidadeSaude, allUnidadesData, Comentario } from '@/data/unidades'; 
@@ -11,6 +11,7 @@ import { Info, User, UserRound } from "lucide-react";
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogTitle, AlertDialogTrigger, AlertDialogFooter, AlertDialogHeader } from "@/components/ui/alert-dialog";
 import Avatar from '@mui/material/Avatar';
 import AvatarGroup from '@mui/material/AvatarGroup';
+import router from "next/router";
 
 export default function UnidadeDetalhesPage() {
     const navLinks = [
@@ -29,6 +30,8 @@ export default function UnidadeDetalhesPage() {
 
     const params = useParams();
     const unidadeId = params.id; // Obter o ID da unidade a partir dos parâmetros da URL (vem como string)
+
+    const router = useRouter();
 
     // A busca da unidade é feita diretamente no array mockado
     // Em um cenário real, você faria uma chamada de API AQUI.
@@ -129,7 +132,7 @@ export default function UnidadeDetalhesPage() {
                     <span className="flex">{renderUserIcons(unidade.status, 32)}</span>
                     <p className="italic text-xs"> {unidade.ultimaAtualizacao}</p>
                     
-                    <button className="mt-4 h-10 font-bold bg-verdeEscuro text-white rounded-lg">RESGISTRAR LOTAÇÃO</button>
+                    <button className="mt-4 h-10 font-bold bg-verdeEscuro text-white rounded-lg" onClick={() => router.push(`/unidades/${unidade.id}/registrar-lotacao`)}>RESGISTRAR LOTAÇÃO</button>
                 </div>
             </div>
 
