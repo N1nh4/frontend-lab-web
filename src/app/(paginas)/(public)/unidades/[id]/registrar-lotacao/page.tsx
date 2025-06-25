@@ -3,9 +3,10 @@
 import BarraTitulo from "@/components/barraTitulo";
 import Cabecalho from "@/components/cabecalho";
 import { useParams } from "next/navigation"; 
-import React, { useEffect } from "react"; 
+import React, { useEffect, useState } from "react"; 
 import Image from "next/image";
-import { allUnidadesData, UnidadeSaude } from '@/data/unidades'; 
+import { allUnidadesData, UnidadeSaude, StatusEnum } from '@/data/unidades'; 
+type StatusEnumType = (typeof StatusEnum)[keyof typeof StatusEnum];
 import { Clock, MapPinHouse, Phone, PhoneCall, User, Users } from "lucide-react";
 
 
@@ -24,6 +25,14 @@ export default function RegistrarLotacaoPage() {
         window.scrollTo(0, 0);
     }, []);
 
+    const [selecionarStatus, setSelecionarStatus] = useState<StatusEnumType | null>(null);
+
+    const getSelecionarIndex = (status: StatusEnumType | null): number => {
+        if (status === null) return -1;
+        return Object.values(StatusEnum).indexOf(status);
+    };
+
+  
     const params = useParams();
     const unidadeId = params.id; // Pega o ID da unidade da URL
 
@@ -88,6 +97,7 @@ export default function RegistrarLotacaoPage() {
                     >Confirme os dados da unidade e Selecione o Status de lotação:</span>
                     
                     <div className="flex-grow flex items-center justify-center gap-8">
+                        
                         <User stroke={"#0E6F4C"} size={64}/><User stroke={"#0E6F4C"} size={64}/><User stroke={"#999999"} size={64}/><User stroke={"#999999"} size={64}/><User stroke={"#999999"} size={64}/>    
                     </div> 
                     <div className="flex justify-center gap-12 "> 
