@@ -32,6 +32,19 @@ export default function Inicial() {
     { id: 6, label: 'Criar conta', href: '/criar-conta' },
   ];
 
+
+  // Scroll no botão do carrosel para a barra de pesquisa
+   const handleScrollToSearchBar = () => {
+    // A barra de pesquisa (BarraTitulo) fixa em 'top-16', que são 64px.
+    // Queremos rolar para essa posição.
+    const scrollPosition = 350; // Altura do cabeçalho principal, onde a barra de título fixa.
+    
+    window.scrollTo({
+      top: scrollPosition,
+      behavior: 'smooth' // Para um scroll suave
+    });
+  };
+
   // Hook para navegação para paginas de detalhes da unidade
   const router = useRouter();
 
@@ -103,6 +116,7 @@ export default function Inicial() {
                 </div>
                 <Button
                   className="bg-[#106A43] hover:bg-[#0c5033] text-white text-lg rounded-lg w-4/12 flex items-center justify-center absolute bottom-10 right-10"
+                  onClick={handleScrollToSearchBar}
                 >
                   REGISTRAR LOTAÇÃO
                 </Button>
@@ -240,7 +254,7 @@ export default function Inicial() {
               </div>
             </CardContent>
             <CardFooter className="flex p-0">
-            <button className="bg-verdeEscuro w-full text-white py-2 px-4 rounded-b-lg ">REGISTRAR LOTAÇÃO</button>
+            <button className="bg-verdeEscuro w-full text-white py-2 px-4 rounded-b-lg " onClick={() => router.push(`/unidades/${card.id}/registrar-lotacao`)} >REGISTRAR LOTAÇÃO</button>
             </CardFooter>
           </Card>
         ))}

@@ -2,13 +2,16 @@
 
 import BarraTitulo from "@/components/barraTitulo";
 import Cabecalho from "@/components/cabecalho";
-import { useParams } from "next/navigation";
-import React, { useState } from "react"; 
+import { useParams, useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react"; 
 import Image from "next/image";
 import { UnidadeSaude, allUnidadesData, Comentario } from '@/data/unidades'; 
 import { renderStars, renderUserIcons } from "@/lib/utils/rendering";
 import { Info, User, UserRound } from "lucide-react";
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogTitle, AlertDialogTrigger, AlertDialogFooter, AlertDialogHeader } from "@/components/ui/alert-dialog";
+import Avatar from '@mui/material/Avatar';
+import AvatarGroup from '@mui/material/AvatarGroup';
+import router from "next/router";
 
 export default function UnidadeDetalhesPage() {
     const navLinks = [
@@ -20,8 +23,15 @@ export default function UnidadeDetalhesPage() {
         { id: 6, label: 'Criar conta', href: '/criar-conta' },
     ];
 
+    // Começar com o scroll na parte superior da página
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     const params = useParams();
     const unidadeId = params.id; // Obter o ID da unidade a partir dos parâmetros da URL (vem como string)
+
+    const router = useRouter();
 
     // A busca da unidade é feita diretamente no array mockado
     // Em um cenário real, você faria uma chamada de API AQUI.
@@ -67,7 +77,7 @@ export default function UnidadeDetalhesPage() {
     return (
        <main className="w-full min-h-screen flex flex-col items-center justify-start ">
             <Cabecalho navLinks={navLinks} />
-            <BarraTitulo titulo="Destaque" />
+            <BarraTitulo titulo="DETALHES DA UNIDADE" />
             <div className="flex  w-3/5 p-8 text-verdeEscuro">
                 <div className="flex w-2/5 mr-8">
                     <Image
@@ -122,12 +132,22 @@ export default function UnidadeDetalhesPage() {
                     <span className="flex">{renderUserIcons(unidade.status, 32)}</span>
                     <p className="italic text-xs"> {unidade.ultimaAtualizacao}</p>
                     
-                    <button className="mt-4 h-10 font-bold bg-verdeEscuro text-white rounded-lg">RESGISTRAR LOTAÇÃO</button>
+                    <button className="mt-4 h-10 font-bold bg-verdeEscuro text-white rounded-lg" onClick={() => router.push(`/unidades/${unidade.id}/registrar-lotacao`)}>RESGISTRAR LOTAÇÃO</button>
                 </div>
             </div>
 
             <div className="mt-8 pt-8 border-t border-gray-200 w-4/5 p-20">
-                <h2 className="text-2xl font-bold text-verdeEscuro mb-4">Comentários</h2>
+                <div className="flex items-center mb-4 gap-4">
+                    <h2 className="flex text-2xl font-bold text-verdeEscuro mb-4">Comentários</h2>
+                    <AvatarGroup max={4}>
+                        <Avatar sx={{ width: 32, height: 32 }} alt="Usuario 1" src="/images/upa.png"/>
+                        <Avatar sx={{ width: 32, height: 32 }} alt="Usuario 2" src="/images/upa.png"/>
+                        <Avatar sx={{ width: 32, height: 32 }} alt="Usuario 3" src="/images/upa.png"/>
+                        <Avatar sx={{ width: 32, height: 32 }} alt="Usuario 1" src="/images/upa.png"/>
+                        <Avatar sx={{ width: 32, height: 32 }} alt="Usuario 2" src="/images/upa.png"/>
+                        <Avatar sx={{ width: 32, height: 32 }} alt="Usuario 3" src="/images/upa.png"/>
+                    </AvatarGroup>
+                </div>
                 { /* Área de comentários */}
                 <div className="flex ">
                     <div className="flex items-center justify-center rounded-full w-12 h-12 bg-gray-200 ">
