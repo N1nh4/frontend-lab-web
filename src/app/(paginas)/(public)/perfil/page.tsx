@@ -173,7 +173,7 @@ export default function Perfil() {
           <div className="w-220 h-59 mb-10 rounded-xl overflow-hidden flex"> {/* aq fica o começo do quadro */}
               <div className="w-3/8 bg-gray-200">
                 <div className=" z-9  text-emerald-800 ml-5 mt-10 w-46">
-                  <h1 className = "font-bold text-[200%] leading-none">Segurança e privadicade</h1>
+                  <h1 className = "font-bold text-[200%] leading-none">Segurança e privacidade</h1>
                   
                 </div>
                 <div className="flex z-9 text-black ml-5 mt-5 w-86">
