@@ -1,6 +1,7 @@
 import Cabecalho from "@/components/cabecalho";
 import {UserRound} from 'lucide-react';
 import {Camera} from 'lucide-react';
+
 export default function Perfil() {
     const navLinks = [
     { id: 1, label: 'Registrar lotação', href: '/registrar-lotacao' },
@@ -61,7 +62,12 @@ export default function Perfil() {
                       <div className=" z-9  text-gray-400 ml-2 mt-1 w-46 ">
                         <h1 className = "font-bold text-[70%] leading-none">NOME:</h1>
                       </div>
-                    </div>
+                      <input
+                        id="nome"
+                        type="text"
+                        className="ml-2"
+                      />
+                  </div>
                   </div>
 
                   <div className="w-39.5 h-12 ml-15 mt-[5.5%] rounded-xl overflow-hidden flex">
@@ -70,6 +76,11 @@ export default function Perfil() {
                         <h1 className = "font-bold text-[70%] leading-none">DATA DE NASCIMENTO:</h1>
                         
                       </div>
+                      <input
+                        id="data"
+                        type="date"
+                        className="ml-2"
+                      />
                     </div>
                   </div>
 
@@ -83,6 +94,11 @@ export default function Perfil() {
                       <div className=" z-9  text-gray-400 ml-2 mt-1 w-46 ">
                         <h1 className = "font-bold text-[70%] leading-none">CIDADE/ESTADO:</h1>
                       </div>
+                      <input
+                        id="cidade/estado"
+                        type="text"
+                        className="ml-2"
+                      />
                     </div>
                   </div>
 
@@ -91,6 +107,11 @@ export default function Perfil() {
                       <div className=" z-9  text-gray-400 ml-2 mt-1 w-46 ">
                         <h1 className = "font-bold text-[70%] leading-none">ENDEREO DE EMAIL:</h1>
                       </div>
+                      <input
+                        id="email"
+                        type="text"
+                        className="ml-2"
+                      />
                     </div>
                   </div>
                   <div className="w-40 h-8 ml-[24%] mt-[15%] rounded-xl overflow-hidden flex">
@@ -125,6 +146,11 @@ export default function Perfil() {
                       <div className=" z-9  text-gray-400 ml-2 mt-1 w-46 ">
                         <h1 className = "font-bold text-[70%] leading-none">TELEFONE:</h1>
                       </div>
+                      <input
+                        id="telefone"
+                        type="number"
+                        className="ml-2 "
+                      />
                     </div>
                   </div>
 
@@ -134,6 +160,11 @@ export default function Perfil() {
                         <h1 className = "font-bold text-[70%] leading-none">N°:</h1>
                         
                       </div>
+                      <input
+                        id="numero"
+                        type="number"
+                        className="w-4/6 ml-2 "
+                      />
                     </div>
                   </div>
 
@@ -147,6 +178,11 @@ export default function Perfil() {
                       <div className=" z-9  text-gray-400 ml-2 mt-1 w-46 ">
                         <h1 className = "font-bold text-[70%] leading-none">RUA:</h1>
                       </div>
+                      <input
+                        id="rua"
+                        type="text"
+                        className="ml-2 "
+                      />
                     </div>
                   </div>
 
@@ -155,6 +191,11 @@ export default function Perfil() {
                       <div className=" z-9  text-gray-400 ml-2 mt-1 w-46 ">
                         <h1 className = "font-bold text-[70%] leading-none">COMPLEMENTO:</h1>
                       </div>
+                      <input
+                        id="complemento"
+                        type="text"
+                        className="w-5/6 ml-2 "
+                      />
                     </div>
                   </div>
                   <div className="w-40 h-8 ml-[24%] mt-[15%] rounded-xl overflow-hidden flex">
@@ -188,6 +229,11 @@ export default function Perfil() {
                       <div className=" z-9  text-gray-400 ml-2 mt-1 w-46 ">
                         <h1 className = "font-bold text-[70%] leading-none">ID:</h1>
                       </div>
+                      <input
+                        id="id"
+                        type="text"
+                        className="ml-2 "
+                      />
                     </div>
                   </div>
                 <div className="w-55 h-12 ml-15 mt-[7%] rounded-xl overflow-hidden flex">
@@ -195,6 +241,11 @@ export default function Perfil() {
                     <div className=" z-9  text-gray-400 ml-2 mt-1 w-46 ">
                       <h1 className = "font-bold text-[70%] leading-none">NOVA SENHA:</h1>
                     </div>
+                    <input
+                        id="novaSenha"
+                        type="text"
+                        className="ml-2 "
+                      />
                   </div>
                 </div>
 
@@ -208,6 +259,11 @@ export default function Perfil() {
                     <div className=" z-9  text-gray-400 ml-2 mt-1 w-46 ">
                       <h1 className = "font-bold text-[70%] leading-none">SENHA ATUAL:</h1>
                     </div>
+                    <input
+                        id="senhaAtual"
+                        type="text"
+                        className="ml-2 "
+                      />
                   </div>
                 </div>
 
@@ -216,6 +272,11 @@ export default function Perfil() {
                     <div className=" z-9  text-gray-400 ml-2 mt-1 w-46 ">
                       <h1 className = "font-bold text-[70%] leading-none">CONFIRMAR SENHA:</h1>
                     </div>
+                    <input
+                        id="senhaConfirmar"
+                        type="text"
+                        className="ml-2 "
+                      />
                   </div>
                 </div>
                   <div className="w-40 h-8 ml-[29%] mt-[16%] rounded-xl overflow-hidden flex">
