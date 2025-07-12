@@ -1,9 +1,9 @@
 export const StatusEnum = {
     VAZIO: "VAZIO",
-    POUCO_VAZIO: "POUCO VAZIO",
+    POUCO_VAZIO: "POUCO_VAZIO",
     MODERADO: "MODERADO",
     CHEIO: "CHEIO",
-    MUITO_CHEIO: "MUITO CHEIO",
+    MUITO_CHEIO: "MUITO_CHEIO",
 } as const;
 
 export type StatusType = typeof StatusEnum[keyof typeof StatusEnum];
@@ -43,7 +43,7 @@ export const allUnidadesData: UnidadeSaude[] = [
         {
           id: 1,
           unidadeId: 1, // Associando o comentário à unidade
-          autor: "João Silva",
+          autor: "João Silva", 
           avatar: "",
           texto: "Ótimo atendimento, muito rápido!",
           data: "2023-10-01 14:30",

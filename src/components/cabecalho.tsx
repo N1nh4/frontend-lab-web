@@ -24,7 +24,7 @@ export default function Cabecalho({ navLinks }: CabecalhoProps) {
         {/* Logo */}
         <div className="flex items-center">
           <Link
-            href="/inicial"
+            href="/"
           >
             <span className="text-2xl font-bold text-white">UpaAgora</span>
           </Link>

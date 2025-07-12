@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Cabecalho from "@/components/cabecalho";
+import { ContextoUsuarioProvider } from "@/data/context/UsuarioContexto";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,8 +29,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* Adicionar possivel overflow-y-auto no futuro */}
-        <main className="flex-1 h-full pt-16">{children}</main>
+        {/* Envolvendo o app com o Provider */}
+        <ContextoUsuarioProvider>
+          <main className="flex-1 h-full">{children}</main>
+        </ContextoUsuarioProvider>
       </body>
     </html>
   );

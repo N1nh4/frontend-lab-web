@@ -4,11 +4,13 @@ import { FaCrown } from "react-icons/fa";
 
 export default function Ranking() {
     const navLinks = [
-        { id: 1, label: 'Registrar lotação', href: '/registrar-lotacao' },
+        { id: 1, label: 'Registrar lotação', href: '/' },
         { id: 2, label: 'Ir para o mapa', href: '/mapa' },
+        { id: 3, label: 'Ranking', href: '/ranking' },
         { id: 4, label: 'Entrar', href: '/entrar' },
         { id: 5, label: 'Sobre nos', href: '/sobre-nos' },
         { id: 6, label: 'Criar conta', href: '/criar-conta' },
+        { id: 7, label: 'Configurações', href: '/perfil' },
     ];
 
     
@@ -36,7 +38,7 @@ export default function Ranking() {
             <div className="container mx-auto px-4  "> 
                 
                 
-                <div className="bg-white rounded-lg shadow-md p-6 h-80 max-w-[56%] mx-auto mb-20 flex justify-center items-end relative" >
+                <div className="bg-white rounded-lg shadow-md p-6 h-80 max-w-[56%] mx-auto mb-20 flex justify-center items-end relative mt-6" >
                     {/* Ícone da Coroa */}
                     <div className="absolute top-4" style={{ left: '50%', transform: 'translateX(-50%)' }}>
                         <FaCrown  className="w-12 h-10 text-yellow-300" />

@@ -39,12 +39,13 @@ function criarIcone(status: StatusCor): L.DivIcon {
 
 export default function Mapa() {
     const navLinks = [
-        { id: 1, label: 'Registrar lotação', href: '/inicial' },
+        { id: 1, label: 'Registrar lotação', href: '/' },
         { id: 2, label: 'Ir para o mapa', href: '/mapa' },
         { id: 3, label: 'Ranking', href: '/ranking' },
         { id: 4, label: 'Entrar', href: '/entrar' },
         { id: 5, label: 'Sobre nos', href: '/sobre-nos' },
         { id: 6, label: 'Criar conta', href: '/criar-conta' },
+        { id: 7, label: 'Configurações', href: '/perfil' },
     ]
   return (
     <div className="h-dvh w-full">

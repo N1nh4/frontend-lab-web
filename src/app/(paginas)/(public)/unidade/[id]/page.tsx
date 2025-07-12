@@ -12,17 +12,22 @@ import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogDescript
 import Avatar from '@mui/material/Avatar';
 import AvatarGroup from '@mui/material/AvatarGroup';
 import router from "next/router";
+import UnidadePaginaDTO from "@/data/unidadePaginaDTO";
+import { getUnidade } from "@/service/unidade";
 
 export default function UnidadeDetalhesPage() {
     const navLinks = [
-        { id: 1, label: 'Registrar lotação', href: '/registrar-lotacao' },
+        { id: 1, label: 'Registrar lotação', href: '/' },
         { id: 2, label: 'Ir para o mapa', href: '/mapa' },
         { id: 3, label: 'Ranking', href: '/ranking' },
         { id: 4, label: 'Entrar', href: '/entrar' },
         { id: 5, label: 'Sobre nos', href: '/sobre-nos' },
         { id: 6, label: 'Criar conta', href: '/criar-conta' },
+        { id: 7, label: 'Configurações', href: '/perfil' },
     ];
-
+    
+    const [comentariosLocais, setComentariosLocais] = useState<Comentario[]>({} as Comentario[]);
+    const [novoComentarioTexto, setNovoComentarioTexto] = useState('');
     // Começar com o scroll na parte superior da página
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -31,11 +36,27 @@ export default function UnidadeDetalhesPage() {
     const params = useParams();
     const unidadeId = params.id; // Obter o ID da unidade a partir dos parâmetros da URL (vem como string)
 
+    const [unidade, setUnidade] = useState<UnidadePaginaDTO | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchData = async (id: number) => {
+            const resposta = await getUnidade(id);
+
+            console.log("Dado: " + resposta)
+            setUnidade(resposta);
+            setLoading(false);
+        }
+
+        if (typeof unidadeId === 'string') {
+            fetchData(parseInt(unidadeId));
+        }
+    }, []);
+
     const router = useRouter();
 
     // A busca da unidade é feita diretamente no array mockado
     // Em um cenário real, você faria uma chamada de API AQUI.
-    const unidade: UnidadeSaude | undefined = allUnidadesData.find(u => u.id.toString() === unidadeId);
 
     // Se a unidade não for encontrada
     if (!unidade) {
@@ -47,8 +68,6 @@ export default function UnidadeDetalhesPage() {
         );
     }
 
-    const [comentariosLocais, setComentariosLocais] = useState<Comentario[]>(unidade.comentarios || []);
-    const [novoComentarioTexto, setNovoComentarioTexto] = useState('');
 
     const handleAddComentario = () => {
         if (novoComentarioTexto.trim() === '') {
@@ -81,24 +100,24 @@ export default function UnidadeDetalhesPage() {
             <div className="flex  w-3/5 p-8 text-verdeEscuro">
                 <div className="flex w-2/5 mr-8">
                     <Image
-                        src={unidade.imagem}
-                        alt={unidade.titulo}
+                        src={unidade.imagemURL}
+                        alt={unidade.nome}
                         width={400}
                         height={300}
                         className="rounded-lg shadow-lg"
                     />
                 </div>
                 <div className="flex flex-col justify-center text-lg  w-3/5 ">
-                    <h2 className="text-2xl font-bold  mb-4">{unidade.titulo}</h2>
+                    <h2 className="text-2xl font-bold  mb-4">{unidade.nome}</h2>
                     <div 
                         className="flex items-center mb-4"
                         onClick={() => alert('Avaliação clicada!')} // Exemplo de ação ao clicar
                     >
-                        {renderStars(unidade.avaliacaoEstrela, 24)}
-                        <span className="ml-2 text-xs text-gray-600">({unidade.avaliacaoEstrela})</span>
+                        {renderStars(unidade.nota, 24)}
+                        <span className="ml-2 text-xs text-gray-600">({unidade.nota})</span>
                         
                     </div>
-                    <p className="mb-2"><span className="font-bold">Endereço:</span> {unidade.endereco}</p>
+                    <p className="mb-2"><span className="font-bold">Endereço:</span> {unidade.endereco.bairro.nome}</p>
                     <p className="mb-2"><span className="font-bold">Telefone:</span> {unidade.telefone}</p>
                     <p className="flex mb-2 font-bold items-center">
                         Status: {unidade.status}
@@ -132,7 +151,7 @@ export default function UnidadeDetalhesPage() {
                     <span className="flex">{renderUserIcons(unidade.status, 32)}</span>
                     <p className="italic text-xs"> {unidade.ultimaAtualizacao}</p>
                     
-                    <button className="mt-4 h-10 font-bold bg-verdeEscuro text-white rounded-lg" onClick={() => router.push(`/unidades/${unidade.id}/registrar-lotacao`)}>RESGISTRAR LOTAÇÃO</button>
+                    <button className="mt-4 h-10 font-bold bg-verdeEscuro text-white rounded-lg" onClick={() => router.push(`/unidade/${unidade.id}/registrar-lotacao`)}>RESGISTRAR LOTAÇÃO</button>
                 </div>
             </div>
 
@@ -176,12 +195,12 @@ export default function UnidadeDetalhesPage() {
                 </div>
                 <div>
                     {/* Lista de Comentários Existentes */}
-                    {comentariosLocais.length > 0 ? (
-                        comentariosLocais.map(comentario => (
+                    {unidade.comentarios.length > 0 ? (
+                        unidade.comentarios.map(comentario => (
                             <div key={comentario.id} className="flex items-start mb-6 p-4 border rounded-lg bg-white shadow-sm">
                                 <User size={32} className="text-gray-500 mr-3 mt-1" />
                                 <div>
-                                    <p className="font-bold text-lg text-gray-900">{comentario.autor}</p>
+                                    <p className="font-bold text-lg text-gray-900">{comentario.cliente.nome}</p>
                                     <p className="text-gray-800 mt-1">{comentario.texto}</p>
                                     <p className="text-sm text-gray-500 mt-2">{comentario.data}</p>
                                 </div>

@@ -54,7 +54,8 @@ export const getCapacityFromStatus = (status: StatusType) => {
 };
 
 // Renderiza os ícones de usuário com base no status
-export const renderUserIcons = (status: StatusType, iconSize: number = 18) => {
+export const renderUserIcons = (status: StatusType, iconSize: number = 24) => {
+
   const totalIcons = 5;
   const userIcons = [];
 

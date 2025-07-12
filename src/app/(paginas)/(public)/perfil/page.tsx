@@ -3,10 +3,13 @@ import {UserRound} from 'lucide-react';
 import {Camera} from 'lucide-react';
 export default function Perfil() {
     const navLinks = [
-    { id: 1, label: 'Registrar lotação', href: '/registrar-lotacao' },
+    { id: 1, label: 'Registrar lotação', href: '/' },
     { id: 2, label: 'Ir para o mapa', href: '/mapa' },
     { id: 3, label: 'Ranking', href: '/ranking' },
+    { id: 4, label: 'Entrar', href: '/entrar' },
     { id: 5, label: 'Sobre nos', href: '/sobre-nos' },
+    { id: 6, label: 'Criar conta', href: '/criar-conta' },
+    { id: 7, label: 'Configurações', href: '/perfil' },
    
   ];
   return (
@@ -14,7 +17,7 @@ export default function Perfil() {
       
       {/* Fundo com divisão diagonal (feito inline) */}
       <div
-      className="fixed top-0 left-0 w-screen h-screen bg-gradient-to-r from-green-800 to-emerald-300 -z-10"
+      className="fixed top-0 left-0 w-screen h-screen bg-gradient-to-r from-verdeClaro to-verdeClaro -z-10"
       style={{ clipPath:"polygon(0 0, 100% 0, 100% 30%, 0 80%)"}}>
       </div>
      
@@ -43,8 +46,8 @@ export default function Perfil() {
           </div>
 
           <div className ="flex flex-col items-start justify-center">
-            <div className="w-220 h-59  mt-15 rounded-xl overflow-hidden flex"> 
-              <div className="w-3/8 bg-gray-200">
+            <div className="w-220 h-59  mt-15 rounded-xl overflow-hidden flex shadow-[5px_5px_4px_rgba(0,0,0,0.25)]"> 
+              <div className="w-3/8 bg-gray-200 ">
                 <div className=" z-9  text-emerald-800 ml-5 mt-10 w-46">
                   <h1 className = "font-bold text-[200%] leading-none">Informações Pessoais</h1>
                   
@@ -54,17 +57,26 @@ export default function Perfil() {
                 </div>
               </div>
 
-              <div className="w-5/8 bg-gray-50">{/* ESSA PORRA AQUI ENGLOBA TUDO */}
-                <div className ="flex flex-col items-start justify-center">
-                  <div className="w-55 h-12 ml-15 mt-[7%] rounded-xl overflow-hidden flex">
+              <div className="w-5/8 bg-gray-50 shadow-[5px_5px_4px_rgba(0,0,0,0.25)]">{/* ESSA PORRA AQUI ENGLOBA TUDO */}
+                <div className ="flex flex-col items-start justify-center ">
+                  <div className="w-55 h-12 ml-15 mt-[7%] rounded-lg overflow-hidden flex">
                     <div className="w-1/1 bg-gray-200">
                       <div className=" z-9  text-gray-400 ml-2 mt-1 w-46 ">
-                        <h1 className = "font-bold text-[70%] leading-none">NOME:</h1>
+                         
+                         
+                           <input
+                              type="text"
+                              value={"Nome:"}
+                           
+                              
+                                                   />
+                      
+                        <h1 className = "font-bold text-[70%] leading-none"></h1>
                       </div>
                     </div>
                   </div>
 
-                  <div className="w-39.5 h-12 ml-15 mt-[5.5%] rounded-xl overflow-hidden flex">
+                  <div className="w-39.5 h-12 ml-15 mt-[5.5%] rounded-lg overflow-hidden flex">
                     <div className="w-1/1 bg-gray-200">
                       <div className=" z-9  text-gray-400 ml-2 mt-1 w-46">
                         <h1 className = "font-bold text-[70%] leading-none">DATA DE NASCIMENTO:</h1>
@@ -76,9 +88,9 @@ export default function Perfil() {
                   
                 </div>
               </div>{/*FINAL DESSA PORRA AQUI ENGLOBA TUDO */}
-              <div className="w-5/8 bg-gray-50">{/* ESSA PORRA AQUI ENGLOBA TUDO */}
+              <div className="w-5/8 bg-gray-50 ">{/* ESSA PORRA AQUI ENGLOBA TUDO */}
                 <div className ="flex flex-col items-start justify-center">
-                  <div className="w-55 h-12 ml-[5%] mt-[6.55%] rounded-xl overflow-hidden flex">
+                  <div className="w-55 h-12 ml-[5%] mt-[6.55%] rounded-lg overflow-hidden flex">
                     <div className="w-1/1 bg-gray-200">
                       <div className=" z-9  text-gray-400 ml-2 mt-1 w-46 ">
                         <h1 className = "font-bold text-[70%] leading-none">CIDADE/ESTADO:</h1>
@@ -86,7 +98,7 @@ export default function Perfil() {
                     </div>
                   </div>
 
-                  <div className="w-70 h-12 ml-[-17%] mt-[6%] rounded-xl overflow-hidden flex">
+                  <div className="w-70 h-12 ml-[-17%] mt-[6%] rounded-lg overflow-hidden flex">
                     <div className="w-1/1 bg-gray-200">
                       <div className=" z-9  text-gray-400 ml-2 mt-1 w-46 ">
                         <h1 className = "font-bold text-[70%] leading-none">ENDEREO DE EMAIL:</h1>
@@ -106,8 +118,8 @@ export default function Perfil() {
             
 
             
-            <div className="w-220 h-59 mt-15 mb-10 rounded-xl overflow-hidden flex">
-              <div className="w-220 h-59 rounded-xl overflow-hidden flex">
+            <div className="w-220 h-59 mt-15 mb-10 rounded-xl overflow-hidden flex shadow-[5px_5px_4px_rgba(0,0,0,0.25)]">
+              <div className="w-220 h-59 rounded-lg overflow-hidden flex">
               <div className="w-3/8 bg-gray-200">
                 <div className=" z-9  text-emerald-800 ml-5 mt-10 w-46">
                   <h1 className = "font-bold text-[200%] leading-none">Informações Complementares</h1>
@@ -120,7 +132,7 @@ export default function Perfil() {
 
               <div className="w-5/8 bg-gray-50">
                 <div className ="flex flex-col items-start justify-center">
-                  <div className="w-55 h-12 ml-15 mt-[7%] rounded-xl overflow-hidden flex">
+                  <div className="w-55 h-12 ml-15 mt-[7%] rounded-lg overflow-hidden flex">
                     <div className="w-1/1 bg-gray-200">
                       <div className=" z-9  text-gray-400 ml-2 mt-1 w-46 ">
                         <h1 className = "font-bold text-[70%] leading-none">TELEFONE:</h1>
@@ -128,7 +140,7 @@ export default function Perfil() {
                     </div>
                   </div>
 
-                  <div className="w-30 h-12 ml-15 mt-[5.5%] rounded-xl overflow-hidden flex">
+                  <div className="w-30 h-12 ml-15 mt-[5.5%] rounded-lg overflow-hidden flex">
                     <div className="w-1/1 bg-gray-200">
                       <div className=" z-9  text-gray-400 ml-2 mt-1 w-46">
                         <h1 className = "font-bold text-[70%] leading-none">N°:</h1>
@@ -142,7 +154,7 @@ export default function Perfil() {
               </div>
               <div className="w-5/8 bg-gray-50">
                 <div className ="flex flex-col items-start justify-center">
-                  <div className="w-55 h-12 ml-[5%] mt-[6%] rounded-xl overflow-hidden flex">
+                  <div className="w-55 h-12 ml-[5%] mt-[6%] rounded-lg overflow-hidden flex">
                     <div className="w-1/1 bg-gray-200">
                       <div className=" z-9  text-gray-400 ml-2 mt-1 w-46 ">
                         <h1 className = "font-bold text-[70%] leading-none">RUA:</h1>
@@ -150,7 +162,7 @@ export default function Perfil() {
                     </div>
                   </div>
 
-                  <div className="w-80 h-12 ml-[-26.2%] mt-[5%] rounded-xl overflow-hidden flex">
+                  <div className="w-80 h-12 ml-[-26.2%] mt-[5%] rounded-lg overflow-hidden flex">
                     <div className="w-1/1 bg-gray-200">
                       <div className=" z-9  text-gray-400 ml-2 mt-1 w-46 ">
                         <h1 className = "font-bold text-[70%] leading-none">COMPLEMENTO:</h1>
@@ -170,7 +182,7 @@ export default function Perfil() {
               
               
           </div>
-          <div className="w-220 h-59 mb-10 rounded-xl overflow-hidden flex"> {/* aq fica o começo do quadro */}
+          <div className="w-220 h-59 mb-10 rounded-xl overflow-hidden flex shadow-[5px_5px_4px_rgba(0,0,0,0.25)]"> {/* aq fica o começo do quadro */}
               <div className="w-3/8 bg-gray-200">
                 <div className=" z-9  text-emerald-800 ml-5 mt-10 w-46">
                   <h1 className = "font-bold text-[200%] leading-none">Segurança e privacidade</h1>
@@ -183,14 +195,14 @@ export default function Perfil() {
 
               <div className="w-4/8 bg-gray-50">{/* ESSA PORRA AQUI ENGLOBA TUDO */}
                 <div className ="flex flex-col items-start justify-center">
-                  <div className="w-55 h-12 ml-15 mt-[7%] rounded-xl overflow-hidden flex">
+                  <div className="w-55 h-12 ml-15 mt-[7%] rounded-lg overflow-hidden flex">
                     <div className="w-1/1 bg-gray-200">
                       <div className=" z-9  text-gray-400 ml-2 mt-1 w-46 ">
                         <h1 className = "font-bold text-[70%] leading-none">ID:</h1>
                       </div>
                     </div>
                   </div>
-                <div className="w-55 h-12 ml-15 mt-[7%] rounded-xl overflow-hidden flex">
+                <div className="w-55 h-12 ml-15 mt-[7%] rounded-lg overflow-hidden flex">
                   <div className="w-1/1 bg-gray-200">
                     <div className=" z-9  text-gray-400 ml-2 mt-1 w-46 ">
                       <h1 className = "font-bold text-[70%] leading-none">NOVA SENHA:</h1>
@@ -203,7 +215,7 @@ export default function Perfil() {
               </div>{/*FINAL DESSA PORRA AQUI ENGLOBA TUDO */}
               <div className="w-5/8 bg-gray-50">{/* ESSA PORRA AQUI ENGLOBA TUDO */}
                 <div className ="flex flex-col items-start justify-center">
-                <div className="w-55 h-12 ml-4.5 mt-[7.2%]  rounded-xl overflow-hidden flex">
+                <div className="w-55 h-12 ml-4.5 mt-[7.2%]  rounded-lg overflow-hidden flex">
                   <div className="w-1/1 bg-gray-200">
                     <div className=" z-9  text-gray-400 ml-2 mt-1 w-46 ">
                       <h1 className = "font-bold text-[70%] leading-none">SENHA ATUAL:</h1>
@@ -211,7 +223,7 @@ export default function Perfil() {
                   </div>
                 </div>
 
-                <div className="w-55 h-12 ml-4.5 mt-[7.2%]  rounded-xl overflow-hidden flex">
+                <div className="w-55 h-12 ml-4.5 mt-[7.2%]  rounded-lg overflow-hidden flex">
                   <div className="w-1/1 bg-gray-200">
                     <div className=" z-9  text-gray-400 ml-2 mt-1 w-46 ">
                       <h1 className = "font-bold text-[70%] leading-none">CONFIRMAR SENHA:</h1>

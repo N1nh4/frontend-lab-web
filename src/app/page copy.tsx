@@ -16,13 +16,13 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { Search, Maximize2, Bell } from "lucide-react";
+import { Search, Maximize2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { allUnidadesData } from "@/data/unidades";
 import { renderStars, renderUserIcons } from "@/lib/utils/rendering";
 import UnidadeSaudeDTO from "@/data/unidadesdto";
-import { getUnidades } from "@/service/unidade";
+import  { getUnidades } from "@/service/unidade";
 
 export default function Inicial() {
   const navLinks = [
@@ -91,12 +91,10 @@ export default function Inicial() {
 
   const [unidadesDTO, setUnidadesDTO] = useState<UnidadeSaudeDTO[]>()
 
-  const [searchTerm, setSearchTerm] = useState('');
-
   // Função para buscar as unidades de saúde
   useEffect(() => {
     const getData = async ()  =>  {
-      const unidadesSaude = await getUnidades()
+      const unidadesSaude = await getUnidades();
       setUnidadesDTO(unidadesSaude);
 
       console.log("Unidades: " + unidadesSaude);
@@ -106,7 +104,7 @@ export default function Inicial() {
   }, [])
 
   return (
-    <main className="w-full min-h-screen pt-16">
+    <main className="w-full min-h-screen">
       
       {/* Cabeçalho */}
       <Cabecalho navLinks={navLinks} />
@@ -210,8 +208,6 @@ export default function Inicial() {
             <input
                 type="text"
                 placeholder="Pesquisar por nome da unidade de saúde..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
                 className={`w-3/4 px-4 bg-white text-xs rounded-l-lg focus:outline-none focus:ring-2 focus:ring-verdeClaro transition-all duration-300 ${
                     isSearchBarSticky ? 'h-9' : 'h-12' 
                 }`}
@@ -236,31 +232,22 @@ export default function Inicial() {
 
       {/* Cards de unidades de saúde */}
       <div className="grid grid-cols-3 pl-10 pr-10 place-items-center justify-center mt-8">
-        {unidadesDTO
-          ?.filter((card) => 
-            card.nome.toLocaleLowerCase().includes(searchTerm.toLowerCase())
-          )
-          .map((card, index) => (
+        {allUnidadesData.map((card, id) => (
           <Card
-            key={index}
+            key={card.id}
             className= "flex flex-col relative bg-verdePastel w-11/12  mx-4 rounded-lg mb-6 shadow-[5px_5px_4px_rgba(0,0,0,0.25)] "
           >
-            <Bell 
-              className="absolute top-2 right-9 cursor-pointer" 
-              size={18} 
-              onClick={() => router.push(`/unidade/${card.id}/notificacoes`)} // Navega para a página de notificações
-            />
             <Maximize2 
               className="absolute top-2 right-2 cursor-pointer" 
               size={18} 
-              onClick={() => router.push(`/unidade/${card.id}`)} // Navega para a página de detalhes
+              onClick={() => router.push(`/unidades/${card.id}`)} // Navega para a página de detalhes
               
             />
             <CardContent className="flex flex-row flex-grow">
-              <div className="flex flex-row items-center w-full justify-center min-h-[200px] ">
+              <div className="flex flex-row items-center w-full justify-center ">
                 <Image
-                  src={card.imagemURL}
-                  alt={card.nome}
+                  src={card.imagem}
+                  alt={card.titulo}
                   width={300}
                   height={300}
                   
@@ -268,15 +255,15 @@ export default function Inicial() {
               </div>
               <div className="flex flex-col text-verdeEscuro w-11/12 justify-center text-justify pl-4 gap-y-1">
                 <div className="flex items-end justify-between w-full">
-                  <h1 className="text-base text-left font-bold gap-y-0 leading-none">{card.nome}</h1>
+                  <h1 className="text-base text-left font-bold gap-y-0 leading-none">{card.titulo}</h1>
                   
                 </div>
                 <div className="flex items-center ">
-                  {renderStars(card.nota)}
+                  {renderStars(card.avaliacaoEstrela)}
                 </div>
-                <p className="text-xs "><span className="font-bold">Endereço:</span> {String(card.endereco.bairro.nome)} - {String(card.endereco.rua)}</p>
+                <p className="text-xs "><span className="font-bold">Endereço:</span> {card.endereco}</p>
                 <p className="text-xs  "><span className="font-bold">Telefone:</span> {card.telefone}</p>
-                <p className="font-bold text-sm ">Status: {card.status.split("_").join(" ")}</p>
+                <p className="font-bold text-sm ">Status: {card.status}</p>
                 <div className="flex items-center " >
                   {renderUserIcons(card.status)}
                 </div>
@@ -284,7 +271,7 @@ export default function Inicial() {
               </div>
             </CardContent>
             <CardFooter className="flex p-0">
-            <button className="bg-verdeEscuro w-full text-white py-2 px-4 rounded-b-lg " onClick={() => router.push(`/unidade/${card.id}/registrar-lotacao`)} >REGISTRAR LOTAÇÃO</button>
+            <button className="bg-verdeEscuro w-full text-white py-2 px-4 rounded-b-lg " onClick={() => router.push(`/unidades/${card.id}/registrar-lotacao`)} >REGISTRAR LOTAÇÃO</button>
             </CardFooter>
           </Card>
         ))}
