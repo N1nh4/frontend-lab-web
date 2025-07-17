@@ -1,4 +1,3 @@
 {
-  "/page": "app/page.js",
-  "/(paginas)/(public)/sobre-nos/page": "app/(paginas)/(public)/sobre-nos/page.js"
+  "/(paginas)/(public)/politica-de-privacidade/page": "app/(paginas)/(public)/politica-de-privacidade/page.js"
 }
