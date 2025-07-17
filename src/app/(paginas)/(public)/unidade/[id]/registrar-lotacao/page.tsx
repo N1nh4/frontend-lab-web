@@ -148,8 +148,8 @@ export default function RegistrarLotacaoPage() {
             <Cabecalho navLinks={navLinks} />
             <BarraTitulo titulo={`REGISTRAR LOTAÇÃO `} /> 
 
-            <div className="flex flex-col w-full flex-grow overflow-y-auto">
-                <div className="flex h-2/3 justify-between ">
+            <div className="flex flex-col w-full h-full flex-grow overflow-y-auto">
+                <div className="flex h-full justify-between ">
                     <div className="flex h-full items-center justify-center max-h-96 w-[300px]">
                         <Image 
                             src={unidade.imagemURL}
@@ -189,7 +189,7 @@ export default function RegistrarLotacaoPage() {
                         </div>
                     </div>
                 </div>
-                <div className="bg-verdeEscuro h-2/3 px-8 py-4 flex flex-col justify-between gap-2">
+                <div className="bg-verdeEscuro fixed bottom-0 left-0 right-0 h-1/4 px-8 py-4 flex flex-col justify-between gap-2">
                     <span 
                         className="italic text-white text-2xl"
                     >Confirme os dados da unidade e Selecione o Status de lotação:</span>

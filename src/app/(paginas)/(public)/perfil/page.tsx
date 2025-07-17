@@ -62,15 +62,15 @@ export default function Perfil() {
                 <div className ="flex flex-col items-start justify-center ">
                   <div className="w-55 h-12 ml-15 mt-[7%] rounded-lg overflow-hidden flex">
                     <div className="w-1/1 bg-gray-200">
-                      <div className=" z-9  text-gray-400 ml-2 mt-1 w-46 ">
-                         
-                         
+                      <div className=" z-9  text-gray-400  mt-1 w-46 ">
+                         <div className=" z-9  text-gray-400 ml-2 mt-1 w-46">
+                            <h1 className = "font-bold text-[70%] leading-none">NOME:</h1>
+                            
+                          </div>
                            <input
                               type="text"
-                              value={"Nome:"}
-                           
-                              
-                                                   />
+                              value={""}
+                             />
                       
                         <h1 className = "font-bold text-[70%] leading-none"></h1>
                       </div>
