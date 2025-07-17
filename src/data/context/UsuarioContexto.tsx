@@ -1,48 +1,41 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode, useEffect } from "react";
 
 // Interface base do usuário
 export interface Usuario {
-  idUsuario: number;
+  usuarioId: number;
   nome: string;
   email: string;
 }
 
 // Tipo do contexto
+import { Dispatch, SetStateAction } from "react";
+
 interface ContextoUsuarioType {
-  usuarios: Usuario[];
   usuarioAtual: Usuario;
-  trocarUsuario: (id: number) => void;
+  setUsuarioAtual: Dispatch<SetStateAction<Usuario>>;
 }
 
 // Criando o contexto
-const ContextoUsuario = createContext<ContextoUsuarioType | undefined>(undefined);
+export const ContextoUsuario = createContext<ContextoUsuarioType | undefined>(undefined);
 
 // Provider
 export const ContextoUsuarioProvider = ({ children }: { children: ReactNode }) => {
-  const usuariosMock: Usuario[] = [
-    {
-      idUsuario: 1,
-      nome: "Alana",
-      email: "alana@example.com",
-    },
-    {
-      idUsuario: 2,
-      nome: "Rafael",
-      email: "rafael@example.com",
-    },
-  ];
 
-  const [usuarioAtual, setUsuarioAtual] = useState<Usuario>(usuariosMock[1]);
+  const [usuarioAtual, setUsuarioAtual] = useState<Usuario>({} as Usuario);
 
-  const trocarUsuario = (id: number) => {
-    const novoUsuario = usuariosMock.find((u) => u.idUsuario === id);
-    if (novoUsuario) setUsuarioAtual(novoUsuario);
-  };
+  useEffect(() => {
+    console.log("Usuario logado:", usuarioAtual);
+  }, [usuarioAtual]);
 
   return (
-    <ContextoUsuario.Provider value={{ usuarios: usuariosMock, usuarioAtual, trocarUsuario }}>
+    <ContextoUsuario.Provider
+      value={{
+        usuarioAtual,
+        setUsuarioAtual
+      }}
+    >
       {children}
     </ContextoUsuario.Provider>
   );

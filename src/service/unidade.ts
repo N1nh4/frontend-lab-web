@@ -86,10 +86,28 @@ async function registrarAtualizacaoCompleta(
   return resposta.json();
 }
 
+async function notificarUnidade(email: string, id: number): Promise<any> {
+    
+  const resposta = await fetch('http://localhost:8080/salvar-email-notificacao', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(email),
+  });
+
+  if (!resposta.ok) {
+    throw new Error('Erro ao enviar notificacao');
+  }
+
+  return resposta.json();
+}
+
 
 export {
     getUnidades,
     getUnidade,
     buscarInformacoesDaUnidade,
-    registrarAtualizacaoCompleta
+    registrarAtualizacaoCompleta,
+    notificarUnidade
 }

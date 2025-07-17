@@ -16,13 +16,15 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { Search, Maximize2, Bell } from "lucide-react";
+import { Search, Maximize2, Bell, BellRing } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { allUnidadesData } from "@/data/unidades";
 import { renderStars, renderUserIcons } from "@/lib/utils/rendering";
 import UnidadeSaudeDTO from "@/data/unidadesdto";
-import { getUnidades } from "@/service/unidade";
+import { getUnidades, notificarUnidade } from "@/service/unidade";
+import { useUsuario } from "@/data/context/UsuarioContexto";
+
 
 export default function Inicial() {
   const navLinks = [
@@ -34,6 +36,11 @@ export default function Inicial() {
     { id: 6, label: 'Criar conta', href: '/criar-conta' },
     { id: 7, label: 'Configurações', href: '/perfil' },
   ];
+
+  
+  // Mudar o icone do sino (bell) de notificacoes
+
+  const [notificado, setNotificado] = useState(false);
 
 
   // Scroll no botão do carrosel para a barra de pesquisa
@@ -93,6 +100,8 @@ export default function Inicial() {
 
   const [searchTerm, setSearchTerm] = useState('');
 
+  const { usuarioAtual } = useUsuario();
+
   // Função para buscar as unidades de saúde
   useEffect(() => {
     const getData = async ()  =>  {
@@ -104,6 +113,10 @@ export default function Inicial() {
 
     getData();
   }, [])
+
+  const notificar = (id: number, email: string) => {
+    notificarUnidade(email, id);
+  }
 
   return (
     <main className="w-full min-h-screen pt-16">
@@ -245,11 +258,26 @@ export default function Inicial() {
             key={index}
             className= "flex flex-col relative bg-verdePastel w-11/12  mx-4 rounded-lg mb-6 shadow-[5px_5px_4px_rgba(0,0,0,0.25)] "
           >
-            <Bell 
-              className="absolute top-2 right-9 cursor-pointer" 
-              size={18} 
-              onClick={() => router.push(`/unidade/${card.id}/notificacoes`)} // Navega para a página de notificações
-            />
+            {
+              notificado 
+              ? 
+              (
+                <BellRing 
+                  className="absolute top-2 right-9 cursor-pointer" 
+                  size={18}
+                />
+              ) : (
+                <Bell 
+                  className="absolute top-2 right-9 cursor-pointer" 
+                  size={18} 
+                  onClick={() => {
+                    notificar(card.id, usuarioAtual?.email)
+                    setNotificado(!notificado)
+                  }} // Navega para a página de notificações
+                />
+              )
+            }
+
             <Maximize2 
               className="absolute top-2 right-2 cursor-pointer" 
               size={18} 

@@ -5,6 +5,8 @@ import { FcGoogle } from "react-icons/fc";
 import { useState } from "react"
 import { login } from '@/service/usuario';
 import { useRouter } from 'next/navigation';
+import { useUsuario } from '@/data/context/UsuarioContexto';
+import { Usuario } from '@/data/context/UsuarioContexto';
 
 
 export default function Entrar() {
@@ -15,13 +17,20 @@ export default function Entrar() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
+  const { setUsuarioAtual } = useUsuario();
+
   const entrar = async () => {
     try {
       const resposta = await login(email, senha, tipoUsuario);
 
-      console.log("Login realizado com sucesso:", resposta);
-
       if (resposta?.mensagem === "Login realizado com sucesso") {
+
+        setUsuarioAtual({
+          usuarioId: resposta.usuarioId,
+          nome: resposta.nome,
+          email: resposta.email,
+        });
+
         if (resposta.usuarioId) {
           console.log("ID do usuário:", resposta.usuarioId);
 

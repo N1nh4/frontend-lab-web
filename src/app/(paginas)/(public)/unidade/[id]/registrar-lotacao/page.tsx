@@ -98,7 +98,7 @@ export default function RegistrarLotacaoPage() {
     try {
         const resposta = await registrarAtualizacaoCompleta(
             statusSelecionado,
-            usuarioAtual.idUsuario,
+            usuarioAtual.usuarioId,
             idNum
         );
         console.log('Resposta do backend:', resposta);
