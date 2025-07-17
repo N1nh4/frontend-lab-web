@@ -118,8 +118,8 @@ export default function Cadastro() {
             {/* Texto "Ao criar a conta..." */}
             <p className="text-gray-600 text-xs mt-4">
               Ao criar a conta você aceita nossas{' '}
-              <a href="#" className="text-emerald-600 hover:underline">Termos de uso</a> e{' '}
-              <a href="#" className="text-emerald-600 hover:underline">Política de privacidade</a>
+              <a href="/termos-de-uso" className="text-emerald-600 hover:underline">Termos de uso</a> e{' '}
+              <a href="/politica-de-privacidade" className="text-emerald-600 hover:underline">Política de privacidade</a>
             </p>
 
             <div className="relative my-6">
