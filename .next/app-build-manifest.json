@@ -11,15 +11,10 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(paginas)/(public)/layout.js"
     ],
-    "/(paginas)/(public)/politica-de-privacidade/page": [
+    "/(paginas)/(public)/termos-de-uso/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(paginas)/(public)/politica-de-privacidade/page.js"
-    ],
-    "/_not-found/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/_not-found/page.js"
+      "static/chunks/app/(paginas)/(public)/termos-de-uso/page.js"
     ]
   }
 }
