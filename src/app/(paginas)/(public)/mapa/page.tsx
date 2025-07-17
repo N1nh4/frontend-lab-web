@@ -5,14 +5,10 @@ import 'leaflet/dist/leaflet.css';
 import { Circle } from 'lucide-react';
 import ReactDOMServer from 'react-dom/server';
 import Cabecalho from '@/components/cabecalho';
+import { useEffect, useState } from 'react';
+import { getUnidadesMapa, UnidadeMapaDTO } from '@/service/mapa';
 
 type StatusCor = 'verde' | 'amarelo' | 'vermelho';
-
-const upas: { nome: string; lat: number; lng: number; status: StatusCor }[] = [
-  { nome: 'UPA 1', lat: -12.97, lng: -38.50, status: 'verde' },
-  { nome: 'UPA 2', lat: -12.96, lng: -38.52, status: 'amarelo' },
-  { nome: 'UPA 3', lat: -12.95, lng: -38.51, status: 'vermelho' },
-];
 
 const corPorStatus: Record<StatusCor, string> = {
   verde: '#22c55e',
@@ -36,6 +32,24 @@ function criarIcone(status: StatusCor): L.DivIcon {
 }
 
 export default function Mapa() {
+
+  const [upas, setUpas] = useState<UnidadeMapaDTO[]>([]);
+
+  useEffect(() => {
+    getUnidadesMapa().then(setUpas);
+  }, []);
+
+  const definirCor = (status: string): StatusCor => {
+    switch (status) {
+      case 'VAZIO': return 'verde';
+      case 'POUCO_VAZIO': return 'verde';
+      case 'MODERADO': return 'amarelo';
+      case 'CHEIO': return 'vermelho';
+      case 'MUITO_CHEIO': return 'vermelho';
+      default: return 'verde';
+    }
+  };
+
   const navLinks = [
     { id: 1, label: 'Registrar lotação', href: '/' },
     { id: 2, label: 'Ir para o mapa', href: '/mapa' },
@@ -64,7 +78,7 @@ export default function Mapa() {
             <Marker
               key={idx}
               position={[upa.lat, upa.lng]}
-              icon={criarIcone(upa.status)}
+              icon={criarIcone(definirCor(upa.status))}
             >
               <Popup>{upa.nome}</Popup>
             </Marker>
