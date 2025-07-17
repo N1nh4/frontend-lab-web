@@ -106,14 +106,14 @@ export default function RegistrarLotacaoPage() {
             <Cabecalho navLinks={navLinks} />
             <BarraTitulo titulo={`REGISTRAR LOTAÇÃO`} />
 
-            <div className="flex flex-col w-full flex-grow overflow-y-auto">
-                <div className="flex h-2/3 justify-between">
-                    <div className="flex h-full items-center justify-center max-h-96 w-[300px]">
+            <div className="flex  flex-col w-full h-full flex-grow overflow-y-auto">
+                <div className="flex h-8/12 justify-between">
+                    <div className="flex  h-full items-center justify-center w-xm">
                         <Image
                             src={unidade.imagemURL}
                             alt="Imagem da unidade"
                             width={300}
-                            height={240}
+                            height={300}
                             className="w-full h-full object-cover max-h-96"
                         />
                     </div>
@@ -157,7 +157,7 @@ export default function RegistrarLotacaoPage() {
                     </div>
                 </div>
 
-                <div className="bg-verdeEscuro h-2/3 px-8 py-4 flex flex-col justify-between gap-2">
+                <div className="bg-verdeEscuro h-1/3 px-8 py-4 flex flex-col justify-between gap-2">
                     <span className="italic text-white text-2xl">
                         Confirme os dados da unidade e selecione o Status de lotação:
                     </span>
@@ -189,7 +189,7 @@ export default function RegistrarLotacaoPage() {
                         <button className="bg-white text-verdeEscuro rounded-2xl h-12 w-48 font-bold">CANCELAR</button>
                         <button onClick={enviarAtualizacao} className="bg-white text-verdeEscuro rounded-2xl h-12 w-48 font-bold">ENVIAR</button>
                     </div>
-                </div>
+                </div> 
             </div>
         </main>
     );
